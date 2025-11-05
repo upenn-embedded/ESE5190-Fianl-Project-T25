@@ -1,6 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/a-5mB3GB)
 
-
 # final-project-skeleton
 
 **Team Number: Team25**
@@ -33,9 +32,9 @@ In modern life, people increasingly spend long hours studying or working alone a
 
 System Block Diagram:
 
-![1761512455422](image/README/1761512455422.png)
+![1762314796790](image/README/1762314796790.png)
 
-**High-level design (per figure):** a two-MCU architecture separates *sensing/comms* from  *actuation/UI* . The **Input MCU (ATmega328PB)** aggregates sensors and bridges to Wi-Fi; the **Output MCU (ATmega328PB)** drives motors, servos, display, and audio. An **ESP32** provides Wi-Fi/HTTP links to a **PC GUI** and  **phone app** . Power comes from a **3×AA pack** with dedicated regulation rails.
+**High-level design (per figure):** a two-MCU architecture separates *sensing/comms* from  *actuation/UI* . The **Input MCU (ATmega328PB)** aggregates sensors and bridges to Wi-Fi; the **Output MCU (ATmega328PB)** drives motors, servos, display, and audio. An **ESP32** provides Wi-Fi/HTTP links to a **PC GUI** and  **phone app** . Power comes from a  USB-C PD power bank/brick via a PD trigger board.
 
 #### Critical Components & Roles
 
@@ -79,9 +78,7 @@ System Block Diagram:
 
 #### Power Regulation
 
-* **Source:** 3×AA battery holder (~4.5 V nominal).
-* **Boost Converter (→ 5 V):** motors, servos, DFPlayer, and (if required) the MCUs’ 5 V rail.
-* **Buck Converter (→ 3.3 V):** ESP32 (requires stable 3.3 V, ≥500 mA peak).
+* **Source:** USB-C Power Delivery (PD) power bank; PD Trigger Board, negotiates a fixed PD voltage (5v) and exposes it as a stable DC output.
 * **Decoupling:** ≥470–1000 µF on motor rail; ≥100 µF near ESP32; 0.1 µF at each IC.
 * **Grounding:** common ground star-point; keep ESP32 antenna and mic away from motor wiring.
 
@@ -102,7 +99,7 @@ System Block Diagram:
   * **ATmega328PB (Input MCU)** collects data from the **voice recognition sensor** and  **temperature/humidity sensor** , then communicates with the **ESP32** via I²C.
   * **ESP32** handles Wi-Fi communication with the **PC User GUI** and **Phone App** via HTTP/Wi-Fi.
   * **ATmega328PB (Output MCU)** drives the  **TFT display** ,  **DFPlayer MP3 module** ,  **motors** , and **servos** using SPI, UART, and PWM interfaces.
-  * **Power** is provided by a  **3×AA battery pack** , with a **boost converter** for 5 V peripherals and a **buck converter** for 3.3 V logic and ESP32.
+  * **Power** is provided by a USB-C PD source through a PD trigger board that outputs a fixed DC 5V voltage.
 * **Critical Design Features:**
 
   * Compact and **cute robotic form** that expresses emotions through the screen and sound.
@@ -114,7 +111,6 @@ System Block Diagram:
   * **3D printing** will be used to create the outer shell and mounting brackets.
   * The structure will be assembled on an **acrylic baseplate** for stability.
   * **No advanced machining** required—hand tools and a 3D printer are sufficient.
-  * Power supplied by **AA batteries** in a detachable holder with switch for easy replacement.
 
 Sketch for this project:
 
@@ -126,16 +122,12 @@ Sketch for this project:
 
 * **MCU**: ATmega328PB microcontroller
 * **DFR0299**: MP3 module, controlled via UART serial commands
-
 * **LCD (ST7735)**: 1.8" 128×160 SPI TFT color display controller, SPI protocol
 * **AHT20**: Adafruit AHT20 Temperature & Humidity Sensor, I²C interface
-
 * **Micro Servo**: TowerPro SG92R, PWM control
 * **ASR**: Automatic Speech Recognition
-
 * **NDJSON**: Newline-Delimited JSON stream protocol for HTTP communication
 * **CMD**: Control Command (MOVE, STOP, TURN, SERVO, etc.)
-
 * **UI**: Remote control user interface (PC web or mobile web/app)
 
 **5.2 Functionality**
@@ -156,16 +148,11 @@ Sketch for this project:
 
 * **VCC / 5 V / 3V3**: Power rails
 * **MCU**: ATmega328PB microcontroller
-
 * **DFR0299**: MP3 module, controlled via UART serial commands
 * **LCD (ST7735)**: 1.8" 128×160 SPI TFT color display controller, SPI protocol
-
 * **AHT20**: Adafruit AHT20 Temperature & Humidity Sensor, I²C interface
 * **Micro Servo**: TowerPro SG92R, PWM control
-
 * 3D **printing**: To print the case and connections
-* **Power Regulator**: Adjust the input power to 3.3V and 5V
-
 * **ASR**: Automatic Speech Recognition
 
 **6.2 Functionality**
@@ -209,9 +196,8 @@ Sketch for this project:
 
 **Power & Regulation**
 
-* **Boost Regulator (3×AA → 3.3 V)** – Stable logic/ESP32 power (≥ 1 A).
-* **Buck Regulator (5 V Output)** – Power rail for motors/servos (≥ 3 A).
-* **Alkaline AA Batteries ×3 + Holder w/ Switch** – Primary power source.
+* **USB-C PD Power Bank** – Primary source (≥20 W).
+* **USB-C PD Trigger Board** – Negotiates and outputs fixed 5 V.
 * **Bulk Capacitors (470–1000 µF)** – Filter motor surges and Wi-Fi peaks.
 * **Level Shifter (BSS138)** – I²C 5 V↔3.3 V conversion if needed.
 * **Emergency Stop Button** – Safety cutoff for PWM outputs.
@@ -221,7 +207,7 @@ Sketch for this project:
 * **Demonstration Setup**
 
   * The robot will be placed on a tabletop or smooth indoor floor.
-  * Powered by 3×AA batteries through regulated 3.3 V and 5 V rails.
+  * Powered by a USB-C PD source via a PD trigger board.
   * Controlled through a **PC web dashboard** and **mobile app interface** over Wi-Fi.
 * **Core Demonstrations**
 
@@ -253,8 +239,6 @@ Sketch for this project:
 | Sprint #2  | LCD and fixed the bugs last week. First draft of the 3D case. WIFI           | The screen can display the corresponding preset expressions, estimated at around 5 to 10 types. Make a prototype of the case based on the components. Able to communicate with the computer through the Wi-Fi module |
 | MVP Demo   | Able to move forward and backwards, nod and shake. Second draft of the case. | Can move based on the input instructions.                                                                                                                                                                            |
 | Final Demo | Assemble and print the 3D case                                               | Assemble everything.                                                                                                                                                                                                 |
-
-
 
 ## Sprint Review #1
 

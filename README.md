@@ -242,11 +242,87 @@ Sketch for this project:
 
 ## Sprint Review #1
 
-### Last week's progress
+### Plan for This Week
 
-### Current state of project
+1. **ESP32 Wireless Communication:**
 
-### Next week's plan
+   Establish wireless communication between the ESP32 module and the PC through Wi-Fi using HTTP requests. The ESP32 was expected to retrieve information such as current time and weather data from a local server running on the PC, while the PC could monitor the controller’s state.
+2. **LCD Display Exploration:**
+
+   Gain a basic understanding of how the ST7735 LCD works on the ATmega328PB. Learn to draw basic shapes, test simple display functions, and implement an initial “facial expression” demo using primitive graphics.
+3. **Motion Control Foundation:**
+
+   Begin developing a prototype for the robot’s base and motion control system, focusing on PWM signal generation and servo angle control.
+
+### Things Done and Proof
+
+1. **ESP32 Wireless Communication:**
+
+   * Successfully implemented HTTP-based communication between ESP32 and PC over Wi-Fi.
+   * Developed a Python server on the PC that responds to ESP32 requests and provides real-time data (time, weather).
+   * Verified bidirectional communication:
+     * ESP32 sends GET requests to fetch information.
+     * PC logs and displays controller state and received requests.
+   * Tested multiple times under stable Wi-Fi connection.
+   * Proof: Serial logs showing successful HTTP responses; server terminal displaying request traces.
+
+   ![1763174528457](image/README/1763174528457.png)
+
+   ![1763174552714](image/README/1763174552714.png)
+2. **Motion Control System:**
+
+   * **Low-Level Pulse Control:** Implemented functions to adjust PWM pulse width (OCR1A/B), including range validation (2000–4000 counts).
+   * **Stable PWM Generation:** Achieved 50 Hz frequency (20 ms period) for standard servo control.
+   * **Angle Abstraction Layer:** Developed functions mapping 0–180° input to corresponding pulse widths using linear interpolation.
+
+   ![1763174567488](image/README/1763174567488.png)
+3. **LCD Display & Animation:**
+
+   * Created a  **blinking-eye animation** , with eyes closing and reopening using efficient region refreshing.
+   * Added synchronized eyebrow movement for enhanced expressiveness.
+   * Verified smooth frame transitions and minimal flicker during updates.
+
+![1763174597272](image/README/1763174597272.png)
+
+### Difficulties
+
+1. **ESP32 Communication:**
+   * Encountered missing dependencies (`requests`, `ArduinoJson`) on both PC and ESP32.
+   * Faced challenges in JSON parsing and Wi-Fi reconnection stability.
+   * Resolved through library installation and implementing error-handling/retry mechanisms.
+2. **Motion Control Development:**
+   * Designing a multi-layer abstraction (Hardware Init → Low-Level Pulse → Mid-Level Angle) required careful modular planning.
+   * Developed and tested control logic  **without physical hardware** , making validation challenging.
+3. **Display Module:**
+   * Managing drawing efficiency and synchronization for smooth animation required optimization of display refresh cycles.
+
+### Things Not Done
+
+1. **ESP32/Blynk Integration:**
+   * Remote control via Blynk not yet implemented.
+   * Voice recognition module (VC-02 or DFRobot Offline Speech) setup pending.
+   * Full system integration with dual ATmega32 boards not yet performed.
+2. **LCD & Sensor Features:**
+   * AHT20 temperature/humidity sensor not yet integrated.
+   * No real-time data display or UI text elements on LCD.
+   * Only the blinking expression implemented; advanced facial expressions (happy, sleepy, surprised) pending.
+3. **Motion System & Hardware:**
+   * High-level movement logic (forward, backward, turn, stop) functions not yet implemented.
+   * No physical case designed for the robot base.
+
+### Plan for Next Week
+
+1. **ESP32 Development:**
+   * Integrate the Blynk platform for smartphone-based remote control.
+   * Begin developing offline voice recognition module.
+   * Test full communication flow between ESP32 and dual ATmega32 boards.
+2. **LCD & Sensor Expansion:**
+   * Read AHT20 temperature/humidity values and display them on the LCD.
+   * Design and render text/icons showing environmental data.
+   * Implement three additional facial expressions (happy, sleepy, surprised).
+3. **Motion & Mechanical Design:**
+   * Replace servo motors with DC motors for larger motion range.
+   * Design and prototype the robot’s base casing for mechanical stability.
 
 ## Sprint Review #2
 

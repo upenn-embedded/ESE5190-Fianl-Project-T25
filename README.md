@@ -12,9 +12,9 @@
 | **Xiao Wang**   | **wang96@seas.upenn.edu**   |
 | **Zhenyao Liu** | **liu59@seas.upenn.edu**    |
 
-**GitHub Repository URL: [https://github.com/upenn-embedded/final-project-f25-f25-final_project_t25.git](https://github.com/upenn-embedded/final-project-f25-f25-final_project_t25.git)**
+**GitHub Repository URL: [GaN HEMT](https://github.com/upenn-embedded/final-project-f25-f25-final_project_t25.git)**
 
-**GitHub Pages Website URL:** [for final submission]*
+**GitHub Pages Website URL:** [GaN HEMT](https://upenn-embedded.github.io/final-project-f25-f25-final_project_t25)
 
 ## Final Project Proposal
 

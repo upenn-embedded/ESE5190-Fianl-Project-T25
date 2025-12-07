@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project - Team 25</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background: #f4f4f4;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Final Project - Team 25</h1>
+        <p>GaN HEMT</p>
+    </header>
+    <main>
+        <section>
+            <h2>Team Information</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Team Member Name</th>
+                        <th>Email Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tanxuan Li</td>
+                        <td><a href="mailto:jeffli88@seas.upenn.edu">jeffli88@seas.upenn.edu</a></td>
+                    </tr>
+                    <tr>
+                        <td>Xiao Wang</td>
+                        <td><a href="mailto:wang96@seas.upenn.edu">wang96@seas.upenn.edu</a></td>
+                    </tr>
+                    <tr>
+                        <td>Zhenyao Liu</td>
+                        <td><a href="mailto:liu59@seas.upenn.edu">liu59@seas.upenn.edu</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Links</h2>
+            <ul>
+                <li><a href="https://github.com/upenn-embedded/ESE5190-Fianl-Project-T25.git" target="_blank">GitHub Repository</a></li>
+                <li><a href="https://upenn-embedded.github.io/Final_T25_GaN_HEMT" target="_blank">GitHub Pages Website</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Final Project Proposal</h2>
+            <h3>1. Abstract</h3>
+            <p><em>In a few sentences, describe your final project.</em></p>
+            <h3>2. Motivation</h3>
+            <p><em>What is the problem that you are trying to solve? Why is this project interesting? What is the intended purpose?</em></p>
+            <h3>3. System Block Diagram</h3>
+            <p><em>Show your high level design, as done in WS1 and WS2. What are the critical components in your system? How do they communicate (I2C?, interrupts, ADC, etc.)? What power regulation do you need?</em></p>
+            <h3>4. Design Sketches</h3>
+            <p><em>What will your project look like? Do you have any critical design features? Will you need any special manufacturing techniques to achieve your vision, like power tools, laser cutting, or 3D printing? Submit drawings for this section.</em></p>
+        </section>
+        <section>
+            <h2>Software Requirements Specification (SRS)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SRS-01</td>
+                        <td>The IMU 3-axis acceleration will be measured with 16-bit depth every 100 milliseconds +/-10 milliseconds</td>
+                    </tr>
+                    <tr>
+                        <td>SRS-02</td>
+                        <td>The distance sensor shall operate and report values at least every .5 seconds.</td>
+                    </tr>
+                    <tr>
+                        <td>SRS-03</td>
+                        <td>Upon non-nominal distance detected (i.e., the trap mechanism has changed at least 10 cm from the nominal range), the system shall be able to detect the change and alert the user in a timely manner (within 5 seconds).</td>
+                    </tr>
+                    <tr>
+                        <td>SRS-04</td>
+                        <td>Upon a request from the user, the system shall get an image from the internal camera and upload the image to the user system within 10s.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Hardware Requirements Specification (HRS)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HRS-01</td>
+                        <td>A distance sensor shall be used for obstacle detection. The sensor shall detect obstacles at a maximum distance of at least 10 cm.</td>
+                    </tr>
+                    <tr>
+                        <td>HRS-02</td>
+                        <td>A noisemaker shall be inside the trap with a strength of at least 55 dB.</td>
+                    </tr>
+                    <tr>
+                        <td>HRS-03</td>
+                        <td>An electronic motor shall be used to reset the trap remotely and have a torque of 40 Nm in order to reset the trap mechanism.</td>
+                    </tr>
+                    <tr>
+                        <td>HRS-04</td>
+                        <td>A camera sensor shall be used to capture images of the trap interior. The resolution shall be at least 480p.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

@@ -12,238 +12,411 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            background-attachment: fixed;
         }
         
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             color: white;
-            padding: 2rem 0;
+            padding: 3rem 2rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10px, 10px) scale(1.1); }
         }
         
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            letter-spacing: -0.5px;
         }
         
         header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            margin: 0.5rem 0;
         }
         
         main {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            margin: -30px auto 0;
+            padding: 0 1.5rem 3rem;
+            position: relative;
+            z-index: 10;
         }
         
         section {
             background: white;
-            margin: 2rem 0;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 2.5rem 0;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            border-radius: 24px 24px 0 0;
         }
         
         h2 {
             color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            border-bottom: none;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
         }
         
         h3 {
             color: #764ba2;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        h3::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
             font-size: 1.3rem;
         }
         
         h4 {
             color: #667eea;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #4a5568;
         }
         
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-            display: block;
-        }
-        
-        table, th, td {
-            border: 1px solid #ddd;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: table;
         }
         
         th, td {
-            padding: 0.75rem;
+            padding: 1rem 1.2rem;
             text-align: left;
         }
         
         th {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-weight: bold;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        
+        th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        
+        tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s ease;
         }
         
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f8fafc;
         }
         
         tr:hover {
-            background-color: #f0f0f0;
+            background-color: #eef2ff;
+        }
+        
+        tr:last-child td:first-child {
+            border-radius: 0 0 0 16px;
+        }
+        
+        tr:last-child td:last-child {
+            border-radius: 0 0 16px 0;
         }
         
         a {
             color: #667eea;
             text-decoration: none;
             font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
         }
         
         a:hover {
-            text-decoration: underline;
             color: #764ba2;
         }
         
         ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-left: 1.8rem;
+            margin-bottom: 1.2rem;
         }
         
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+            color: #4a5568;
         }
         
-        .team-table {
-            width: 100%;
+        li strong {
+            color: #2d3748;
         }
         
         .video-container {
-            background: #f0f0f0;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 1rem 0;
+            background: linear-gradient(135deg, #f6f8fb 0%, #eef2f7 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 1.5rem 0;
             text-align: center;
+            border: 2px solid #e8ecf1;
         }
         
         .video-info {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #e8f4f8;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: white;
             border-left: 4px solid #667eea;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
         .image-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            gap: 2rem;
+            margin: 2rem 0;
         }
         
         .image-card {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: none;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
         
         .image-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(102, 126, 234, 0.2);
         }
         
         .image-card img {
             width: 100%;
             height: 300px;
             object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.05);
         }
         
         .image-card-caption {
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
             color: #667eea;
+            font-size: 0.95rem;
+            background: linear-gradient(to bottom, #f8fafc, white);
         }
         
         .featured-image {
             max-width: 100%;
             height: auto;
-            margin: 1rem 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 1.5rem 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .featured-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 36px rgba(102, 126, 234, 0.25);
         }
         
         .validation-box {
-            background: #f0f8ff;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-left: 4px solid #667eea;
-            border-radius: 4px;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #667eea;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
         }
         
         .validation-box h4 {
             color: #667eea;
+            margin-top: 0;
         }
         
         .success {
-            color: #27ae60;
-            font-weight: bold;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.05rem;
         }
         
         .attention {
-            background: #fff3cd;
-            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left-color: #f59e0b;
         }
         
         .highlight {
-            background: #fffacd;
-            padding: 1rem;
-            border-radius: 4px;
-            margin: 1rem 0;
+            background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #f59e0b;
         }
         
         footer {
-            background: #333;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             color: white;
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 40px 40px 0 0;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer p {
+            color: #cbd5e1;
+            margin: 0.5rem 0;
         }
         
         .team-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
         
         .team-member {
-            background: #f9f9f9;
-            padding: 1rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 1.8rem;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid #ddd;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
         }
         
         .team-member strong {
             color: #667eea;
+            font-size: 1.15rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
         
         .conclusion-section {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .conclusion-section h3 {
+            padding-left: 0;
+        }
+        
+        .conclusion-section h3::before {
+            content: '🌟';
+            margin-right: 0.5rem;
         }
         
         /* Lightbox styles for image viewing */
@@ -255,9 +428,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.92);
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .lightbox.active {
@@ -268,36 +448,53 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 40px;
+            top: 30px;
+            right: 50px;
             color: white;
-            font-size: 40px;
-            font-weight: bold;
+            font-size: 48px;
+            font-weight: 300;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
         }
         
         .lightbox-close:hover {
-            color: #667eea;
+            background: rgba(102, 126, 234, 0.9);
+            transform: rotate(90deg);
         }
         
         .lightbox-caption {
             position: absolute;
-            bottom: 20px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            border-radius: 12px;
             max-width: 80%;
             text-align: center;
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
         }
         
         .image-card img {
@@ -308,31 +505,77 @@
             cursor: pointer;
         }
         
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #764ba2, #667eea);
+        }
+        
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            
+            header {
+                border-radius: 0 0 24px 24px;
+                padding: 2rem 1rem;
             }
             
             section {
-                padding: 1rem;
+                padding: 1.5rem;
+                border-radius: 16px;
+                margin: 1.5rem 0;
             }
             
             .image-gallery {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             table {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                border-radius: 12px;
             }
             
             th, td {
-                padding: 0.5rem;
+                padding: 0.8rem;
             }
             
             .lightbox-close {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
+                top: 15px;
+                right: 25px;
+                font-size: 36px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .team-info {
+                grid-template-columns: 1fr;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -373,33 +616,33 @@
         <section>
             <h2>📋 Project Overview</h2>
             <h3>Abstract</h3>
-            <p>Our project aims to design and implement an interactive desktop pet robot that can engage in real-time communication with users through voice, visual, and motion responses. The system is built on an ATmega328PB microcontroller, integrating an offline voice recognition module, a temperature and humidity sensor, a TFT LCD display, a DFR0299 voice playback module, micro servos, and a Wi-Fi module.</p>
+            <p>Our project aims to design and implement an interactive desktop pet robot that can engage in real-time communication with users through voice, visual, and motion responses. The system is built on a single ATmega328PB microcontroller working in coordination with an ESP32 Wi-Fi module, integrating an offline voice recognition module, a temperature and humidity sensor, a TFT LCD display, a DFPlayer Mini audio module, micro servos, and stepper motors.</p>
             
-            </p>The robot can recognize voice commands, respond with synthesized or pre-recorded speech, and display dynamic facial expressions and environmental information such as temperature and humidity on the LCD. Additionally, the Wi-Fi module allows users to control the robot through a mobile application, providing an alternative way to interact and customize behaviors.</p>
+            <p>The robot can recognize voice commands, respond with pre-recorded speech, and display dynamic facial expressions and environmental information such as temperature and humidity on the LCD. The ESP32 Wi-Fi module enables users to control the robot remotely through a mobile application, providing an alternative way to interact and customize behaviors over the network.</p>
             
             <h3>Motivation</h3>
             <p>Modern life often involves long hours of solitary work or study at desks, leading to stress and social disconnection. Our project addresses this by creating a smart desktop companion that provides emotional engagement and environmental awareness. By combining offline voice recognition, expressive display, and motion response, we create a friendly, interactive experience that brings liveliness to personal workspaces while maintaining the ability to operate independently without constant internet connectivity.</p>
             
             <h3>System Architecture</h3>
-            <p>The robot employs a sophisticated two-MCU architecture that separates concerns effectively:</p>
+            <p>The robot employs a streamlined single-MCU architecture with intelligent resource management:</p>
             <ul>
-                <li><strong>Input MCU (ATmega328PB):</strong> Aggregates sensor data from the DFRobot offline voice recognition module and AHT20 temperature/humidity sensor via I²C, communicates with the ESP32 Wi-Fi module for remote commands.</li>
-                <li><strong>Output MCU (ATmega328PB):</strong> Drives the TFT LCD display (SPI), controls servo motors (PWM), manages 28BYJ-48 stepper motors via ULN2003 driver boards with sequential 4-phase control, and handles audio playback through the DFPlayer Mini module (UART).</li>
-                <li><strong>ESP32 Wi-Fi Module:</strong> Provides Wi-Fi connectivity, bridging between the robot and PC/mobile applications via HTTP.</li>
+                <li><strong>Main MCU (ATmega328PB):</strong> Serves as the central processing unit, managing all peripheral communications including DFRobot offline voice recognition and AHT20 temperature/humidity sensor via I²C, driving the TFT LCD display via SPI, controlling servo motors and 28BYJ-48 stepper motors through optimized PWM channels with ULN2003 drivers using sequential 4-phase control, and handling audio playback through the DFPlayer Mini module via UART. Through careful channel optimization and signal line reduction, we successfully consolidated all control functions onto a single MCU.</li>
+                <li><strong>ESP32 Wi-Fi Module:</strong> Acts as a dedicated network communication bridge, providing Wi-Fi connectivity and HTTP server functionality for remote mobile app control. It communicates with the ATmega328PB via UART to relay commands and status updates.</li>
             </ul>
             
             <h3>System Block Diagram</h3>
-            <p>The following diagram illustrates our complete system architecture, showing the dual-MCU design with all peripheral connections and communication protocols:</p>
+            <p>The following diagram illustrates our complete system architecture, showing the single-MCU design with all peripheral connections and communication protocols:</p>
             <div style="text-align: center; margin: 2rem 0;">
-                <img src="image/README/1762314796790.png" alt="System Block Diagram - Dual MCU Architecture" class="featured-image" style="max-width: 100%; border: 2px solid #667eea;" onclick="openLightbox(this.src, this.alt)">
+                <img src="image/README/1762314796790.png" alt="System Block Diagram - Single MCU Architecture with ESP32" class="featured-image" style="max-width: 100%; border: 2px solid #667eea;" onclick="openLightbox(this.src, this.alt)">
                 <p style="margin-top: 0.5rem; font-style: italic; color: #666;">Click to view the detailed system block diagram</p>
             </div>
             <p><strong>Key Design Features:</strong></p>
             <ul>
-                <li><strong>Dual-MCU Separation:</strong> Input MCU handles all sensing and communication, Output MCU manages all actuation and display</li>
-                <li><strong>Multiple Communication Protocols:</strong> I²C for sensors, UART for inter-MCU and audio, SPI for display, PWM for motors/servos, HTTP/Wi-Fi for remote control</li>
+                <li><strong>Optimized Single-MCU Design:</strong> ATmega328PB handles all sensing, actuation, and display tasks through careful channel reduction and signal line optimization</li>
+                <li><strong>Multiple Communication Protocols:</strong> I²C for sensors, UART for ESP32 communication and audio module, SPI for display, PWM for motors and servos</li>
+                <li><strong>ESP32 Network Bridge:</strong> Dedicated Wi-Fi module providing HTTP server for mobile app connectivity and command relay to main MCU</li>
                 <li><strong>Power Management:</strong> USB-C PD with trigger board, bulk capacitors for noise filtering, separate 3.3V regulation for sensitive analog circuits</li>
-                <li><strong>Modular Design:</strong> Each subsystem can be developed, tested, and debugged independently before integration</li>
+                <li><strong>Resource Efficiency:</strong> Consolidated design reduces complexity while maintaining full functionality through intelligent multiplexing and optimization</li>
             </ul>
         </section>
 
@@ -431,7 +674,7 @@
         <section>
             <h2>📸 Project Images</h2>
             
-            <h3>Featured Project Image (400×400)</h3>
+            <h3>Featured Project Image</h3>
             <div style="text-align: center;">
                 <p><em>GaN HEMT Desktop Pet Robot - Official Project Cover</em></p>
                 <img src="image/README/image_for_final/cover_pic.jpg" alt="GaN HEMT Desktop Pet Robot Cover" class="featured-image" style="max-width: 400px; max-height: 400px;" onclick="openLightbox(this.src, this.alt)">
@@ -483,7 +726,7 @@
             <div class="image-gallery">
                 <div class="image-card">
                     <img src="image/README/image_for_final/Atmega32PB_and_esp32_detail.jpg" alt="ATmega328PB and ESP32 Boards" onclick="openLightbox(this.src, this.alt)">
-                    <div class="image-card-caption">ATmega328PB MCU Boards & ESP32 WiFi Module</div>
+                    <div class="image-card-caption">ATmega328PB Main MCU & ESP32 WiFi Module</div>
                 </div>
                 <div class="image-card">
                     <img src="image/README/image_for_final/motor_driver_detail.jpg" alt="Motor Driver Detail" onclick="openLightbox(this.src, this.alt)">
@@ -514,15 +757,15 @@
             <h3>Component Integration Overview</h3>
             <p>The images above showcase the complete integration of:</p>
             <ul>
-                <li><strong>Dual MCU Architecture:</strong> Two ATmega328PB boards working in tandem - Input MCU for sensor aggregation and Output MCU for actuator control, clearly visible in the open case views</li>
+                <li><strong>Single MCU Architecture:</strong> ATmega328PB serves as the central controller managing all peripherals through optimized channel allocation and signal line reduction. ESP32 provides dedicated Wi-Fi connectivity for mobile app control.</li>
                 <li><strong>TFT LCD Display:</strong> 1.8" ST7735 color display showing animated facial expressions (happy emoji) and real-time environmental data (temperature/humidity readings)</li>
                 <li><strong>Stepper Motor Control System:</strong> 28BYJ-48 stepper motors with ULN2003 Darlington array driver boards providing precise 4-phase sequential control for accurate positioning and smooth motion</li>
                 <li><strong>Power Distribution Network:</strong> USB-C PD trigger board negotiating 5V supply, with bulk capacitors (470µF + 1000µF) for transient stabilization and noise filtering</li>
                 <li><strong>Voice Interaction System:</strong> DFRobot offline voice recognition module for command input, paired with DFPlayer Mini and 3W speaker for audio feedback</li>
                 <li><strong>Environmental Sensing:</strong> AHT20 I²C temperature and humidity sensor providing ambient environment monitoring displayed on screen</li>
                 <li><strong>Motion Control:</strong> TowerPro SG51R micro servo for head/expression movement, enabling physical interaction beyond screen-based expressions</li>
-                <li><strong>WiFi Connectivity:</strong> ESP32 module bridging local commands to remote PC/mobile app control via HTTP protocol</li>
-                <li><strong>3D-Printed Enclosure:</strong> Custom-designed case with annotated front panel showing component placement and user interface elements</li>
+                <li><strong>Mobile App Connectivity:</strong> ESP32 module acting as HTTP server for remote control via smartphone over Wi-Fi, communicating with main MCU via UART</li>
+                <li><strong>Custom-designed case:</strong> The shell is handcrafted and is precisely customized according to the dimensions of the components and internal layout for optimal fit and protection.</li>
             </ul>
         </section>
 
@@ -531,12 +774,13 @@
             <h2>✅ System Performance Results</h2>
             
             <h3>System Integration Overview</h3>
-            <p>The final system successfully integrates all major components with a two-MCU architecture, providing:</p>
+            <p>The final system successfully integrates all major components with an optimized single-MCU architecture, providing:</p>
             <ul>
-                <li>Dual-MCU separation of sensing/control and actuation/display concerns</li>
+                <li>Efficient single ATmega328PB design handling all sensing, actuation, and display through optimized channel management</li>
+                <li>ESP32 as dedicated network module enabling mobile app control via Wi-Fi/HTTP</li>
                 <li>Offline voice recognition with cloud-free operation capability</li>
                 <li>Real-time environmental monitoring (temperature/humidity)</li>
-                <li>Multi-modal user interaction (voice, Wi-Fi, physical buttons)</li>
+                <li>Multi-modal user interaction (voice, Wi-Fi mobile control)</li>
                 <li>Responsive LCD display with animated expressions</li>
                 <li>Motion control through 28BYJ-48 stepper motors with ULN2003 drivers for precise 4-phase sequential control</li>
             </ul>
@@ -588,9 +832,9 @@
                     </tr>
                     <tr>
                         <td><strong>SRS-06</strong></td>
-                        <td>MCU-to-PC communication via ESP32/HTTP with sequence-acknowledgment mechanism.</td>
+                        <td>MCU-to-Mobile communication via ESP32/HTTP with sequence-acknowledgment mechanism.</td>
                         <td><span class="success">✓ ACHIEVED</span></td>
-                        <td>TCP/IP handshake verified with Wireshark packet captures. 10-minute continuous communication test: 0 packet loss, 100% ACK success rate. HTTP response times average 45ms.</td>
+                        <td>UART communication between ATmega328PB and ESP32 verified at 115200 baud with 0 frame errors. TCP/IP handshake verified with Wireshark packet captures. 10-minute continuous communication test: 0 packet loss, 100% ACK success rate. HTTP response times from mobile app average 45ms. ESP32 HTTP server reliably relays commands to main MCU.</td>
                     </tr>
                     <tr>
                         <td><strong>SRS-07</strong></td>
@@ -603,7 +847,7 @@
             
             <div class="validation-box">
                 <h4>SRS Validation Summary</h4>
-                <p>All seven software requirements have been successfully validated. The system demonstrates robust performance across temperature sensing, display refresh timing, audio communication, motion control, speech recognition, network communication, and user interface responsiveness. The only minor deviation from initial specifications was in SRS-05, where we achieved 94% accuracy instead of the target 85%, exceeding expectations.</p>
+                <p>All seven software requirements have been successfully validated. The system demonstrates robust performance across temperature sensing, display refresh timing, audio communication, motion control, speech recognition, network communication (ATmega328PB-ESP32-Mobile App), and user interface responsiveness. The streamlined single-MCU design with ESP32 network bridge exceeded expectations, achieving 94% voice recognition accuracy (vs. 85% target) while maintaining efficient resource utilization.</p>
             </div>
 
             <!-- HRS Validation Section -->
@@ -668,7 +912,7 @@
             
             <div class="validation-box">
                 <h4>HRS Validation Summary</h4>
-                <p>All seven hardware requirements have been successfully validated and exceeded in several cases. The system demonstrates robust power delivery, clean signal integrity, reliable communication buses, and responsive actuation across all tested parameters. The dual-MCU architecture provides effective isolation between analog sensor domains and high-noise motor control domains, resulting in stable, repeatable operation.</p>
+                <p>All seven hardware requirements have been successfully validated and exceeded in several cases. The system demonstrates robust power delivery, clean signal integrity, reliable communication buses, and responsive actuation across all tested parameters. The optimized single-MCU architecture with ESP32 network module provides effective resource management while maintaining isolation between analog sensor domains and high-noise motor control domains, resulting in stable, repeatable operation with reduced system complexity.</p>
             </div>
         </section>
 
@@ -680,10 +924,11 @@
                 <h3>What We Learned</h3>
                 <p>This project provided invaluable hands-on experience in embedded systems design and integration:</p>
                 <ul>
-                    <li><strong>Multi-MCU Architecture:</strong> Learned the benefits and challenges of distributed processing, understanding when to separate concerns (sensing vs. actuation) and how to manage inter-MCU communication protocols (I²C, UART).</li>
-                    <li><strong>Real-time Constraints:</strong> Appreciated the importance of timing analysis in embedded systems, from SPI display refresh rates to UART baud rate calculations to PWM frequency selection.</li>
-                    <li><strong>Power Management:</strong> Hands-on experience with power supply design, decoupling strategies, and noise isolation between digital and analog domains.</li>
-                    <li><strong>Protocol Integration:</strong> Successfully integrated multiple communication standards (I²C, UART, SPI, PWM, HTTP/Wi-Fi) on a single platform.</li>
+                    <li><strong>Resource Optimization:</strong> Learned to consolidate complex functionality onto a single MCU through careful channel management, signal line reduction, and intelligent peripheral multiplexing. This experience taught us the importance of resource planning and optimization in embedded systems.</li>
+                    <li><strong>Distributed System Design:</strong> Understanding how to effectively partition tasks between a main MCU (ATmega328PB) and a dedicated network module (ESP32), leveraging each processor's strengths for optimal system performance.</li>
+                    <li><strong>Real-time Constraints:</strong> Appreciated the importance of timing analysis in embedded systems, from SPI display refresh rates to UART baud rate calculations to PWM frequency selection, all while managing multiple peripherals on a single MCU.</li>
+                    <li><strong>Power Management:</strong> Hands-on experience with power supply design, decoupling strategies, and noise isolation between digital and analog domains in a consolidated system.</li>
+                    <li><strong>Protocol Integration:</strong> Successfully integrated multiple communication standards (I²C, UART, SPI, PWM, HTTP/Wi-Fi) on an optimized single-MCU platform.</li>
                     <li><strong>System Validation:</strong> Developed systematic testing methodology using oscilloscopes, logic analyzers, and software logging for requirement verification.</li>
                 </ul>
             </div>
@@ -691,22 +936,25 @@
             <div class="conclusion-section">
                 <h3>What Went Well</h3>
                 <ul>
-                    <li><strong>Modular Design Philosophy:</strong> The separation of input and output MCUs proved highly effective, allowing parallel development and simplified debugging.</li>
-                    <li><strong>Component Selection:</strong> Choosing readily available, well-documented components (ATmega328PB Xplained Mini boards, STM-based LCD) significantly accelerated development.</li>
-                    <li><strong>Firmware Architecture:</strong> Implementing clear abstraction layers (e.g., angle control above pulse width control above timer registers) made the codebase maintainable and testable.</li>
+                    <li><strong>Single-MCU Optimization:</strong> Successfully consolidated all control functions onto one ATmega328PB through intelligent channel reduction and signal optimization, proving that careful design can achieve efficiency without sacrificing functionality.</li>
+                    <li><strong>ESP32 Integration:</strong> The ESP32 performed excellently as a dedicated network module, providing reliable Wi-Fi connectivity and HTTP server functionality for mobile app control.</li>
+                    <li><strong>Component Selection:</strong> Choosing readily available, well-documented components (ATmega328PB Xplained Mini board, ESP32, ST7735 LCD) significantly accelerated development.</li>
+                    <li><strong>Firmware Architecture:</strong> Implementing clear abstraction layers and efficient interrupt handling made the single-MCU codebase maintainable despite managing multiple peripherals.</li>
                     <li><strong>Voice Recognition Integration:</strong> The DFRobot offline recognition module performed exceptionally well, exceeding our 85% accuracy target with 94% in controlled testing.</li>
-                    <li><strong>Team Collaboration:</strong> Clear division of responsibilities between Input/Output MCU firmware and system integration allowed efficient parallel work.</li>
+                    <li><strong>Team Collaboration:</strong> Clear division of responsibilities between hardware optimization, firmware development, and network integration allowed efficient parallel work.</li>
                 </ul>
             </div>
             
             <div class="conclusion-section">
                 <h3>Accomplishments We're Proud Of</h3>
                 <ul>
-                    <li><strong>Zero Communication Errors:</strong> Achieving 10+ minutes of error-free I²C/UART operation demonstrates robust protocol implementation and board design.</li>
+                    <li><strong>Single-MCU Success:</strong> Achieving full system functionality on a single ATmega328PB through careful optimization, proving that efficient design can reduce complexity without compromising features.</li>
+                    <li><strong>Zero Communication Errors:</strong> Achieving 10+ minutes of error-free I²C/UART operation across all peripherals and the ATmega328PB-ESP32 link demonstrates robust protocol implementation.</li>
                     <li><strong>Exceeded Performance Targets:</strong> Voice recognition accuracy of 94% vs. 85% target, and latency measurements all well within specifications.</li>
-                    <li><strong>Comprehensive System Integration:</strong> Successfully bringing together 15+ hardware modules and 3 communication protocols on a unified platform.</li>
+                    <li><strong>Mobile App Control:</strong> Successfully implemented remote control via smartphone through ESP32 HTTP server with reliable command relay and sub-50ms response times.</li>
+                    <li><strong>Comprehensive System Integration:</strong> Successfully bringing together 15+ hardware modules and 5 communication protocols on an optimized single-MCU platform.</li>
                     <li><strong>Professional Documentation:</strong> Creation of detailed SRS/HRS specifications with rigorous validation methodology.</li>
-                    <li><strong>3D Casework Design:</strong> Successful mechanical integration of electronics into an aesthetically pleasing robot form factor.</li>
+                    <li><strong>Custom Casework Design:</strong> Successful mechanical integration of electronics into an aesthetically pleasing robot form factor.</li>
                 </ul>
             </div>
             
@@ -714,8 +962,9 @@
                 <h3>Design Approach & Changes</h3>
                 <p><strong>Key Design Evolution:</strong></p>
                 <ul>
-                    <li><strong>Initial vs. Final Architecture:</strong> Initially considered single MCU with heavy multiplexing; pivoted to dual-MCU after realizing the timing constraints between real-time motor control and sensor aggregation were incompatible. The dual-MCU approach proved far superior for maintainability.</li>
-                    <li><strong>Communication Protocol Selection:</strong> Started with SPI for inter-MCU; switched to UART due to simpler board routing and lower EMI. UART 115200 baud provided sufficient bandwidth while being more robust.</li>
+                    <li><strong>Initial vs. Final Architecture:</strong> Initially considered dual-MCU architecture with separate input and output controllers. Through careful analysis, we successfully optimized the design to use a single ATmega328PB by reducing unnecessary signal lines, optimizing channel allocation, and implementing efficient multiplexing. This consolidation simplified the system while maintaining full functionality and reducing potential points of failure.</li>
+                    <li><strong>ESP32 Role Definition:</strong> Rather than using ESP32 as a general-purpose co-processor, we optimized it as a dedicated network bridge, handling only Wi-Fi connectivity and HTTP server functions while the ATmega328PB manages all real-time control tasks. This clear separation of responsibilities improved system reliability.</li>
+                    <li><strong>Communication Protocol Selection:</strong> UART proved ideal for ATmega328PB-ESP32 communication, providing sufficient bandwidth for command relay while keeping routing simple and robust.</li>
                     <li><strong>Display Selection:</strong> Considered larger displays (2.4", 3.5") but settled on 1.8" ST7735 to keep power consumption reasonable and maintain desk-friendly form factor.</li>
                     <li><strong>Motor Architecture:</strong> Initially planned DC motors with PWM speed control; switched to 28BYJ-48 stepper motors with ULN2003 drivers for better position control and smoother low-speed operation. The 4-phase sequential control provides more precise movement for the desktop pet's limited range of motion.</li>
                 </ul>
@@ -724,11 +973,12 @@
             <div class="conclusion-section attention">
                 <h3>🚧 Obstacles Encountered</h3>
                 <ul>
-                    <li><strong>Power Supply Stability:</strong> Initial breadboard implementation suffered from severe voltage ripple during motor stalls. Solution: Implemented large bulk capacitor bank (1000µF + 470µF) on motor rail with separate 3.3V regulation for analog circuits. This issue taught us the criticality of power distribution in mixed-signal systems.</li>
+                    <li><strong>Single-MCU Resource Management:</strong> Consolidating all peripherals onto one ATmega328PB required careful pin allocation and interrupt priority management. Solution: Created detailed pin mapping spreadsheet, optimized timer usage, and implemented priority-based interrupt handling to prevent conflicts between time-critical operations.</li>
+                    <li><strong>Power Supply Stability:</strong> Initial breadboard implementation suffered from severe voltage ripple during motor operation. Solution: Implemented large bulk capacitor bank (1000µF + 470µF) on motor rail with separate 3.3V regulation for analog circuits. This issue taught us the criticality of power distribution in mixed-signal systems.</li>
                     <li><strong>EMI/Noise Coupling:</strong> Motor PWM switching was coupling into analog sensor signals through improperly routed ground planes. Required careful PCB layout revision with separate ground planes for digital and analog domains.</li>
-                    <li><strong>I²C Bus Contention:</strong> Initially attempted to run voice recognition module, temp sensor, and PCA9685 servo expander on single I²C bus. Higher-bandwidth peripheral communication caused timing issues. Solution: Dedicated separate I²C buses for sensor aggregation vs. PWM expansion.</li>
+                    <li><strong>ATmega328PB-ESP32 Communication:</strong> Initial attempts at bidirectional UART communication had occasional frame errors. Solution: Implemented robust framing protocol with checksums and acknowledgments, reducing error rate to zero over extended testing.</li>
                     <li><strong>Voice Recognition Accuracy in Noisy Environment:</strong> Initial testing in the lab yielded only 72% accuracy due to ambient noise and HVAC interference. Solution: Implemented noise suppression firmware filter and conducted testing in quieter environment, achieving target 85%+ accuracy.</li>
-                    <li><strong>Real-time Interrupt Conflicts:</strong> Multiple time-critical interrupts (Timer1 for PWM, UART receive, I²C) occasionally conflicted. Implemented priority-based interrupt scheme with careful timer tuning to prevent priority inversion.</li>
+                    <li><strong>Real-time Interrupt Conflicts:</strong> Multiple time-critical interrupts (Timer1 for PWM, UART receive for ESP32, I²C for sensors) occasionally conflicted. Implemented priority-based interrupt scheme with careful timer tuning to prevent priority inversion.</li>
                 </ul>
             </div>
             

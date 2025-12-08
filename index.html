@@ -373,7 +373,9 @@
         <section>
             <h2>📋 Project Overview</h2>
             <h3>Abstract</h3>
-            <p>Our project is an interactive desktop pet robot that engages users through voice recognition, visual expression display, and motion response. Built on a dual ATmega328PB architecture with an ESP32 Wi-Fi bridge, the robot integrates multiple sensors (offline voice recognition module, temperature/humidity sensor), a TFT LCD display for animated facial expressions, micro servos, and motor controllers. Users can interact with the robot through voice commands or via a web-based remote control panel over Wi-Fi, making it an engaging desk companion that provides both emotional engagement and environmental awareness.</p>
+            <p>Our project aims to design and implement an interactive desktop pet robot that can engage in real-time communication with users through voice, visual, and motion responses. The system is built on an ATmega328PB microcontroller, integrating an offline voice recognition module, a temperature and humidity sensor, a TFT LCD display, a DFR0299 voice playback module, micro servos, and a Wi-Fi module.</p>
+            
+            </p>The robot can recognize voice commands, respond with synthesized or pre-recorded speech, and display dynamic facial expressions and environmental information such as temperature and humidity on the LCD. Additionally, the Wi-Fi module allows users to control the robot through a mobile application, providing an alternative way to interact and customize behaviors.</p>
             
             <h3>Motivation</h3>
             <p>Modern life often involves long hours of solitary work or study at desks, leading to stress and social disconnection. Our project addresses this by creating a smart desktop companion that provides emotional engagement and environmental awareness. By combining offline voice recognition, expressive display, and motion response, we create a friendly, interactive experience that brings liveliness to personal workspaces while maintaining the ability to operate independently without constant internet connectivity.</p>
@@ -385,6 +387,20 @@
                 <li><strong>Output MCU (ATmega328PB):</strong> Drives the TFT LCD display (SPI), controls servo motors (PWM), manages 28BYJ-48 stepper motors via ULN2003 driver boards with sequential 4-phase control, and handles audio playback through the DFPlayer Mini module (UART).</li>
                 <li><strong>ESP32 Wi-Fi Module:</strong> Provides Wi-Fi connectivity, bridging between the robot and PC/mobile applications via HTTP.</li>
             </ul>
+            
+            <h3>System Block Diagram</h3>
+            <p>The following diagram illustrates our complete system architecture, showing the dual-MCU design with all peripheral connections and communication protocols:</p>
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="image/README/1762314796790.png" alt="System Block Diagram - Dual MCU Architecture" class="featured-image" style="max-width: 100%; border: 2px solid #667eea;" onclick="openLightbox(this.src, this.alt)">
+                <p style="margin-top: 0.5rem; font-style: italic; color: #666;">Click to view the detailed system block diagram</p>
+            </div>
+            <p><strong>Key Design Features:</strong></p>
+            <ul>
+                <li><strong>Dual-MCU Separation:</strong> Input MCU handles all sensing and communication, Output MCU manages all actuation and display</li>
+                <li><strong>Multiple Communication Protocols:</strong> I²C for sensors, UART for inter-MCU and audio, SPI for display, PWM for motors/servos, HTTP/Wi-Fi for remote control</li>
+                <li><strong>Power Management:</strong> USB-C PD with trigger board, bulk capacitors for noise filtering, separate 3.3V regulation for sensitive analog circuits</li>
+                <li><strong>Modular Design:</strong> Each subsystem can be developed, tested, and debugged independently before integration</li>
+            </ul>
         </section>
 
         <!-- Final Demo Video Section -->
@@ -392,15 +408,22 @@
             <h2>🎥 Final Demo Video</h2>
             <div class="video-container">
                 <h3>Desktop Pet Robot - Complete Functionality Demo</h3>
+                <p style="margin-bottom: 1.5rem;">This video demonstrates the robot's complete functionality including voice recognition, Wi-Fi remote control, stepper motor motion, LCD facial expressions, environmental sensing, and audio feedback in an integrated system.</p>
+                
+                <!-- Embedded Google Drive Video Player -->
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin: 1.5rem 0;">
+                    <iframe src="https://drive.google.com/file/d/1NroqmagO9cOS1FrMaRXVxVrxkaFy61dW/preview" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+                            allow="autoplay; fullscreen" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                
                 <div class="video-info">
-                    <p><strong>Video Duration:</strong> 5 minutes or less</p>
-                    <p><strong>Content:</strong> Comprehensive demonstration of key functionality including voice recognition, Wi-Fi remote control, motion control, LCD display expressions, and sensor integration.</p>
-                    <p><strong>Access:</strong> Video is available to the teaching team via Google Drive with SEAS account access.</p>
-                    <p style="margin-top: 1rem;">
-                        <strong>📹 <a href="https://drive.google.com/file/d/1NroqmagO9cOS1FrMaRXVxVrxkaFy61dW/view?usp=sharing" target="_blank">View Final Demo Video on Google Drive</a></strong>
+                    <p style="text-align: center;">
+                        <strong>📹 <a href="https://drive.google.com/file/d/1NroqmagO9cOS1FrMaRXVxVrxkaFy61dW/view?usp=sharing" target="_blank">Open in Google Drive (Full Quality)</a></strong>
                     </p>
                 </div>
-                <p style="margin-top: 1rem; font-style: italic; color: #666;">The video demonstrates the robot's core capabilities in a controlled environment with clear audio and visual documentation.</p>
             </div>
         </section>
 

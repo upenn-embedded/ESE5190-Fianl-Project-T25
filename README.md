@@ -326,28 +326,166 @@ Sketch for this project:
 
 ## Sprint Review #2
 
-### Last week's progress
+### Plan for this week
 
-### Current state of project
+1. Complete LCD expressions display.
+2. Complete the wheel mounting and base control
+3. 3.Complete wireless control using Blynk
 
-### Next week's plan
+### Things done and proof:
+
+1. Focus on LCD part
+
+* Completed multiple LCD expression outputs.
+* Refactored the LCD code into a state-machine architecture to avoid blocking and enable smooth multitasking.
+* Developed a Python script to convert images into pixel data and successfully displayed them on the LCD.
+
+![1763780221481](image/README/1763780221481.png)
+
+* Implemented the eye-blinking animation with smooth visual performance.
+
+![]()![1763780231505](image/README/1763780231505.png)
+
+* Resolved LCD hardware wiring issues by rewiring the pins according to the team’s updated design and verifying successful operation.
+
+2.![1763780240301](image/README/1763780240301.png)![]()
+
+* Successfully anchored the wheels to the motor, ensuring reliable mechanical coupling.
+* Developed and implemented the control program, enabling precise actuation of movement commands.
+* Replaced the servo with a motor to achieve a wider range of motion.
+* Verified that the system can now move forward, turn left and right, and adjust wheel speed effectively.
+
+3. Successfully control the motor by Blynk. Use phone to wirelessly control the robot moving.
+
+### Difficulty:
+
+1. LCD
+
+* The LCD brightness pin could not be controlled using PWM outside port B, so a normal GPIO pin was used instead.
+* LCD drawing operations originally blocked other tasks; solved by implementing a non-blocking state machine that updates pixels line-by-line.
+
+2. Motor:
+
+* Mechanical alignment between the motor and wheel required careful adjustment to avoid slippage.
+* Transitioning from servo to motor introduced new challenges in control tuning and stability.
+* Ensuring smooth speed regulation demanded iterative testing and parameter calibration.
+
+3. ESP32
+
+* Integration of wireless communication with PC and Blynk.
+* Serial communication between ESP32 and ATmega32 and control the motion part for moving.
+
+things not done:
+
+1. Integration of temperature/humidity sensor data and the speaker functionality (blocked due to component issues).
+2. Case not added
+3. The servo for the head was not added
+4. Voice recognition module has not been developed
+
+### Plan for next week
+
+1. Implement switching between different expressions, display sensor data on the LCD, and enable the speaker for specific sound playback.
+2. Use a plank to build a case for the base
+3. Build servo logic for the head.
+4. Develop voice recognition module
 
 ## MVP Demo
 
 1. Show a system block diagram & explain the hardware implementation.
+
+![1764218509844](image/README/1764218509844.png)
+
+* For LCD, temperature, speaker parts, our system uses an ATmega328PB as the main controller, connected via SPI to a 1.8" ST7735 TFT LCD, via I2C to an AHT20 temperature-humidity sensor, and via UART to a DFPlayer Mini audio module. In our block diagram, the LCD renders facial expressions, the AHT20 provides live environment data, and the DFPlayer plays fixed voice responses when triggered over UART. All parts are powered from the same 5 V rail.
+* The motor and servo motor systems are both controlled by the ATmega328PB microcontroller.For the drive motors, we utilize the CTC mode to generate varying frequency waveforms from the controller's output pins. This allows for the precise control of the speed of the two DC motors on each side, enabling the robot to execute basic motion functions such as forward, backward, and turning (left/right).For servo motor control, we employ a continuous 50Hz PWM signal. The servo's angle is precisely determined by the high-level pulse width: a pulse of 0.5ms corresponds to 0°, and a pulse of 2.5ms corresponds to 180°, allowing for linear interpolation for intermediate angles. We use interrupts in this part as the timer has been used up. The servos are primarily used to implement nodding and head-shaking functionalities, enhancing the robot's interactive responses.The entire system is powered uniformly by a 5V DC power module.
+* ESP32 Wi-Fi Communication Module: The ESP32 functions as the wireless communication bridge between the external control interfaces and the robot’s internal control system. It connects to the local Wi-Fi network and receives commands from either the PC-based server or the Blynk mobile application. These commands are encoded into lightweight serial frames and forwarded to the ATmega328PB via a UART link operating at 115200 bps. In this configuration, the ESP32 is responsible solely for network connectivity and transparent command forwarding, ensuring a clean separation between wireless communication and motor actuation hardware.
+* Speech Recognition Module (I²C Control Interface): An offline speech-recognition module provides a secondary control path. The module operates over the I²C bus and has been configured with a trained command set tailored to the robot’s motion primitives. A full TWI communication driver enables the ATmega328PB to poll the module for new recognition events and retrieve command identifiers. The recognized commands are then mapped into the unified control pipeline. This hardware path enables fully local, low-latency voice control without dependency on wireless infrastructure.
+* ATmega328PB Motion-Control Interface: The ATmega328PB serves as the central motion-control unit, receiving commands through both UART (from the ESP32) and I²C (from the speech module). Commands are interpreted and dispatched to the motor driver via PWM and GPIO outputs. The hardware architecture ensures that both wireless and voice-based inputs converge at the ATmega, which is responsible for generating the final actuation signals that drive the robot’s movement.
+
 2. Explain your firmware implementation, including application logic and critical drivers you've written.
+
+* For LCD part
+
+  * uses a 1 ms Timer0 interrupt to maintain a global millisecond counter (millis()), which is then used to schedule all tasks in a non-blocking way inside the main while(1) loop
+  * For the eyes and eyebrows, the code defines geometry constants and fast SPI drawing helpers (fast_hline, fast_restore_eye_row) that update only horizontal lines or eye rows instead of redrawing the whole screen,A blink state machine (blink_step) is called every 50 ms
+  * The mouth and lower-face “expression area” have four modes: smile, sad, pout, and a text screen. Each expression is drawn with a dedicated function using rectangles, circles, and fast horizontal line operations. A global expr_state tracks the current expression. Every 100 ms, the main loop polls UART non-blocking; characters ‘1’–‘4’ request expression changes, and ‘5’–‘8’ control DFPlayer tracks. A small “switch lock” with timeout prevents very fast expression toggling; when switching, the mouth region is cleared and the new expression is drawn.
+* For sensing part
+
+  * the AHT20 is driven over I²C. Every 500 ms, the code triggers a measurement, reads 20-bit raw temperature/humidity data, converts it into physical values scaled by 10, and accumulates them. Every 10 seconds, it computes average temperature and humidity and updates latest_t_avg10 and latest_h_avg10 plus a sequence counter avg_seq. When the expression is state 4 (T/H screen), any new average triggers an automatic refresh of the bottom text region, where centered strings like “T=xx.x C” and “H=yy.y %RH” are redrawn on the LCD.
+* For Motor part
+
+  * the driver utilizes the 8-bit Timer0 in CTC Mode (Mode 2) to generate drive signals on pins PD5 and PD6. Instead of using software loops to toggle pins, the driver dynamically manipulates the COM0A0 and COM0B0 bits to enable hardware toggling on compare match, producing a stable 50% duty cycle square wave. The frequency (which dictates motor speed/pitch) is controlled by OCR0A, allowing the system to switch between FREQ_HIGH and FREQ_LOW. At the application layer, movement is handled by blocking functions like turn_angle, which uses a calibration constant (MS_PER_DEGREE) to convert target angles into precise delay durations, and move_straight_time for linear distance control.
+* For Servo part
+
+  * a custom interrupt-driven software PWM driver is implemented using the 16-bit Timer1. Configured with a prescaler of 8, the timer provides 0.5 µs tick resolution with ICR1 setting the standard 20 ms (50 Hz) servo period. The pulse generation relies on three specific Interrupt Service Routines (ISRs): the TIMER1_CAPT ISR sets both Pan (PD3) and Tilt (PD4) pins HIGH at the start of the cycle, while COMPA and COMPB ISRs independently clear the pins when the counter matches the target pulse width. A helper function, angle_to_ticks, maps 0–180° inputs to the required 1000–5000 timer ticks. To prevent servo jitter during updates, the driver performs atomic operations by briefly disabling interrupts (cli()) when updating the global pulse width variables.
+* ESP32 Firmware Logic
+
+  * The ESP32 firmware integrates Wi-Fi connectivity, Blynk communication, and a UART command-forwarding engine. Incoming network commands are parsed and translated into compact structured frames that are transmitted to the ATmega328PB. This implementation maintains low communication latency and ensures consistent message delivery between cloud-based or PC-based control interfaces and the robot’s local controller.
+* ATmega328PB Firmware Logic
+
+  * The ATmega firmware includes a UART parsing engine for interpreting commands forwarded by the ESP32, as well as a complete I²C driver stack for interacting with the speech-recognition module. Both input channels feed a unified command dispatch layer responsible for triggering the appropriate motor-control routines. All communication routines are written in a non-blocking style to avoid interference with PWM timing, ensuring smooth and responsive motion output.
+* Speech-Recognition Integration
+
+  * Integration of the speech module is supported by a periodic detection loop that polls for new recognition results and processes the returned ID codes. A command-mapping mechanism translates these IDs into standardized motion commands understood by the main control layer. This ensures that voice commands and Wi-Fi commands share a unified control behavior and produce identical responses at the actuator level.
+
 3. Demo your device.
+
+Motion part:
+
+![]()![1764217749055](image/README/1764217749055.png)
+
+PC GUI:
+
+![1764219257913](image/README/1764219257913.png)
+
+![1764219268055](image/README/1764219268055.png)
+
+Voice recognition module:
+
+![1764218849471](image/README/1764218849471.png)
+
+![1764218915770](image/README/1764218915770.png)
+
+LCD screen:
+
+![1764219136455](image/README/1764219136455.png)
+
+
 4. Have you achieved some or all of your Software Requirements Specification (SRS)?
 
-   1. Show how you collected data and the outcomes.
+* The AHT20 temperature readings are correctly processed with 1 °C resolution, and humidity values are displayed with 1 % RH precision, meeting the required display accuracy.
+* Our optimized LCD rendering pipeline allows partial-area refreshes to complete within ≤ 50 ms, fully satisfying the timing requirement for smooth animation and UI updates.
+* The DFPlayer Mini also meets its software-level responsiveness requirement, as it can change playback state quickly upon receiving UART commands.
+* The servo driver meets the positioning accuracy requirements, successfully targeting specific angles to perform clear 'Yes' (nodding) and 'No' (shaking) head gestures without jitter.
+* The motor control system achieves rapid response times, enabling the robot to start,
+* stop, and turn instantly upon command.
+* The system successfully receives motion commands over Wi-Fi through the ESP32 and forwards them to the ATmega328PB via UART.
+* The speech-recognition module reliably provides command IDs over I²C after library porting and command-set training.
+* A unified command-dispatch pipeline correctly maps both Wi-Fi and voice inputs to the same motion-control API.
+* End-to-end command latency remains below the 1-second requirement for both communication pathways.
+* UART and I²C communication stacks operate in a fully non-blocking manner to ensure stable real-time control.
+
 5. Have you achieved some or all of your Hardware Requirements Specification (HRS)?
 
-   1. Show how you collected data and the outcomes.
-6. Show off the remaining elements that will make your project whole: mechanical casework, supporting graphical user interface (GUI), web portal, etc.
-7. What is the riskiest part remaining of your project?
+* The AHT20 sensor is powered from a stable 5 V supply with ripple well below 50 mV peak-to-peak, and the wiring length is kept under 20 cm, routed away from high-dv/dt signals to prevent interference.
+* The LCD subsystem operates correctly and can display temperature/humidity data, five distinct facial expressions, and text responses triggered by voice commands.
+* For audio, the DFR0299 module meets the hardware timing requirement: after a valid voice-command trigger, it produces the first audible syllable within ≤ 1.5 s, and it is able to play ten distinct voice-response phrases, satisfying the functional specification.
+* Locomotion Subsystem: The DC motors can provide consistent torque and stable rotational speed to ensure the robot chassis moves smoothly and fluidly across surfaces without stuttering.
+* Servo Actuation: The servo motors are able to have a fast response time and high actuation speed to execute distinct "nodding" and "head-shaking" gestures immediately upon command.
+* The ESP32 operates as a stable Wi-Fi interface and maintains reliable communication with external control sources.
+* The UART connection between the ESP32 and ATmega328PB has been validated under high-frequency command transmission.
+* The I²C interface with the speech-recognition module consistently returns accurate recognition results.
+* The ATmega328PB successfully converts received command packets into motor-control outputs through PWM/GPIO lines.
+* Wireless control hardware and voice-control hardware are fully operational and integrated into the robot’s actuation path.
 
-   1. How do you plan to de-risk this?
-8. What questions or help do you need from the teaching team?
+6. Show off the remaining elements that will make your project whole: mechanical casework, supporting graphical user interface (GUI), web portal, etc.
+
+* The remaining work mainly involves completing the physical enclosure and performing the final integration and assembly of all subsystems into the finished device.
+* Several subsystems remain to be integrated to complete the full robotic platform. These include the TFT/LCD expression display, servo-based head-movement mechanisms, sensor modules (such as temperature or IMU sensors), and the final mechanical enclosure. In addition, a unified system-level controller must be implemented to merge wireless commands, voice commands, sensor inputs, animations, and motion routines into a single coordinated state machine. Completion of these components will allow seamless interaction between all subsystems and provide the final user-facing functionality envisioned for the complete design.
+
+7. What is the riskiest part remaining of your project?How do you plan to de-risk this?
+
+* The riskiest remaining aspect is that too many peripherals connected simultaneously may cause performance slowdown or latency. To de-risk this, we plan to optimize communication scheduling, reduce blocking operations, and ensure efficient wiring and power distribution so the system can run smoothly with all modules active.
+* The most significant remaining risk involves multi-module integration on the ATmega328PB, where UART, I²C, SPI, and PWM processes must coexist without timing conflicts or resource contention. Additional risk arises from command-source arbitration when voice and Wi-Fi inputs arrive simultaneously. These concerns will be mitigated through a non-blocking, event-driven firmware architecture, strict Timer allocation (e.g., Timer1 for servos, Timer0 for motors, Timer2 for periodic tasks), and the introduction of message-queue structures for command serialization. A staged integration approach—beginning with communication subsystems, followed by actuator layers, and concluding with display and sensor modules—will reduce complexity and isolate potential faults early.
 
 ## Final Project Report
 

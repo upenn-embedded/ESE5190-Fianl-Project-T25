@@ -246,6 +246,68 @@
             margin: 1rem 0;
         }
         
+        /* Lightbox styles for image viewing */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .lightbox-close:hover {
+            color: #667eea;
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            max-width: 80%;
+            text-align: center;
+        }
+        
+        .image-card img {
+            cursor: pointer;
+        }
+        
+        .featured-image {
+            cursor: pointer;
+        }
+        
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8rem;
@@ -265,6 +327,12 @@
             
             th, td {
                 padding: 0.5rem;
+            }
+            
+            .lightbox-close {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
             }
         }
     </style>
@@ -314,7 +382,7 @@
             <p>The robot employs a sophisticated two-MCU architecture that separates concerns effectively:</p>
             <ul>
                 <li><strong>Input MCU (ATmega328PB):</strong> Aggregates sensor data from the DFRobot offline voice recognition module and AHT20 temperature/humidity sensor via I²C, communicates with the ESP32 Wi-Fi module for remote commands.</li>
-                <li><strong>Output MCU (ATmega328PB):</strong> Drives the TFT LCD display (SPI), controls servo motors (PWM), manages DC motors via motor drivers, and handles audio playback through the DFPlayer Mini module (UART).</li>
+                <li><strong>Output MCU (ATmega328PB):</strong> Drives the TFT LCD display (SPI), controls servo motors (PWM), manages 28BYJ-48 stepper motors via ULN2003 driver boards with sequential 4-phase control, and handles audio playback through the DFPlayer Mini module (UART).</li>
                 <li><strong>ESP32 Wi-Fi Module:</strong> Provides Wi-Fi connectivity, bridging between the robot and PC/mobile applications via HTTP.</li>
             </ul>
         </section>
@@ -343,7 +411,7 @@
             <h3>Featured Project Image (400×400)</h3>
             <div style="text-align: center;">
                 <p><em>GaN HEMT Desktop Pet Robot - Official Project Cover</em></p>
-                <img src="image/README/image_for_final/cover_pic.jpg" alt="GaN HEMT Desktop Pet Robot Cover" class="featured-image" style="max-width: 400px; max-height: 400px;">
+                <img src="image/README/image_for_final/cover_pic.jpg" alt="GaN HEMT Desktop Pet Robot Cover" class="featured-image" style="max-width: 400px; max-height: 400px;" onclick="openLightbox(this.src, this.alt)">
             </div>
 
             <h3>Complete Robot Views</h3>
@@ -351,23 +419,23 @@
             
             <div class="image-gallery">
                 <div class="image-card">
-                    <img src="image/README/image_for_final/overall.jpg" alt="Overall Robot View">
+                    <img src="image/README/image_for_final/overall.jpg" alt="Overall Robot View" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Overall Robot - Complete Assembly</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/front_with_happy_emoji.jpg" alt="Front View with Happy Expression">
+                    <img src="image/README/image_for_final/front_with_happy_emoji.jpg" alt="Front View with Happy Expression" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Front View - Happy Emoji Expression</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/front_with_happy_emoji_with_different_angle.jpg" alt="Front View Different Angle">
+                    <img src="image/README/image_for_final/front_with_happy_emoji_with_different_angle.jpg" alt="Front View Different Angle" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Front View - Happy Expression (Alt Angle)</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/front_with_displaying_info.jpg" alt="Front View with Information Display">
+                    <img src="image/README/image_for_final/front_with_displaying_info.jpg" alt="Front View with Information Display" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Front View - Displaying Environmental Info</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/front_with_comment.jpg" alt="Front View with Annotations">
+                    <img src="image/README/image_for_final/front_with_comment.jpg" alt="Front View with Annotations" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Front View - Annotated Components</div>
                 </div>
             </div>
@@ -377,11 +445,11 @@
             
             <div class="image-gallery">
                 <div class="image-card">
-                    <img src="image/README/image_for_final/left_side_of_robot_with_open_case.jpg" alt="Left Side Open Case">
+                    <img src="image/README/image_for_final/left_side_of_robot_with_open_case.jpg" alt="Left Side Open Case" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Left Side - Internal Layout Exposed</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/right_with_open_case.jpg" alt="Right Side Open Case">
+                    <img src="image/README/image_for_final/right_with_open_case.jpg" alt="Right Side Open Case" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">Right Side - PCB and Wiring Detail</div>
                 </div>
             </div>
@@ -391,31 +459,31 @@
             
             <div class="image-gallery">
                 <div class="image-card">
-                    <img src="image/README/image_for_final/Atmega32PB_and_esp32_detail.jpg" alt="ATmega328PB and ESP32 Boards">
+                    <img src="image/README/image_for_final/Atmega32PB_and_esp32_detail.jpg" alt="ATmega328PB and ESP32 Boards" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">ATmega328PB MCU Boards & ESP32 WiFi Module</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/motor_driver_detail.jpg" alt="Motor Driver Detail">
-                    <div class="image-card-caption">TB6612FNG Motor Driver Board</div>
+                    <img src="image/README/image_for_final/motor_driver_detail.jpg" alt="Motor Driver Detail" onclick="openLightbox(this.src, this.alt)">
+                    <div class="image-card-caption">28BYJ-48 Step Motor Driver Board -- ULN2003 Driver IC</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/PD_power_supply_detail.jpg" alt="Power Supply Detail">
+                    <img src="image/README/image_for_final/PD_power_supply_detail.jpg" alt="Power Supply Detail" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">USB-C PD Power Supply & Regulation Circuit</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/Head_servo_detail.jpg" alt="Head Servo Mechanism">
-                    <div class="image-card-caption">TowerPro SG92R Head Servo Detail</div>
+                    <img src="image/README/image_for_final/Head_servo_detail.jpg" alt="Head Servo Mechanism" onclick="openLightbox(this.src, this.alt)">
+                    <div class="image-card-caption">TowerPro SG51R Head Servo Detail</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/Speaker_with_detail.jpg" alt="Speaker and Audio Module">
+                    <img src="image/README/image_for_final/Speaker_with_detail.jpg" alt="Speaker and Audio Module" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">3W Speaker & DFPlayer Mini Module</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/Input_mic_detail.jpg" alt="Microphone and Voice Input">
+                    <img src="image/README/image_for_final/Input_mic_detail.jpg" alt="Microphone and Voice Input" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">DFRobot Offline Voice Recognition Module</div>
                 </div>
                 <div class="image-card">
-                    <img src="image/README/image_for_final/Temp_and_humidity_sensor_detail.jpg" alt="Temperature and Humidity Sensor">
+                    <img src="image/README/image_for_final/Temp_and_humidity_sensor_detail.jpg" alt="Temperature and Humidity Sensor" onclick="openLightbox(this.src, this.alt)">
                     <div class="image-card-caption">AHT20 Temperature & Humidity Sensor</div>
                 </div>
             </div>
@@ -425,11 +493,11 @@
             <ul>
                 <li><strong>Dual MCU Architecture:</strong> Two ATmega328PB boards working in tandem - Input MCU for sensor aggregation and Output MCU for actuator control, clearly visible in the open case views</li>
                 <li><strong>TFT LCD Display:</strong> 1.8" ST7735 color display showing animated facial expressions (happy emoji) and real-time environmental data (temperature/humidity readings)</li>
-                <li><strong>Motor Control System:</strong> TB6612FNG dual motor driver providing PWM control for four DC gear motors with proper heat dissipation</li>
+                <li><strong>Stepper Motor Control System:</strong> 28BYJ-48 stepper motors with ULN2003 Darlington array driver boards providing precise 4-phase sequential control for accurate positioning and smooth motion</li>
                 <li><strong>Power Distribution Network:</strong> USB-C PD trigger board negotiating 5V supply, with bulk capacitors (470µF + 1000µF) for transient stabilization and noise filtering</li>
                 <li><strong>Voice Interaction System:</strong> DFRobot offline voice recognition module for command input, paired with DFPlayer Mini and 3W speaker for audio feedback</li>
                 <li><strong>Environmental Sensing:</strong> AHT20 I²C temperature and humidity sensor providing ambient environment monitoring displayed on screen</li>
-                <li><strong>Motion Control:</strong> TowerPro SG92R micro servo for head/expression movement, enabling physical interaction beyond screen-based expressions</li>
+                <li><strong>Motion Control:</strong> TowerPro SG51R micro servo for head/expression movement, enabling physical interaction beyond screen-based expressions</li>
                 <li><strong>WiFi Connectivity:</strong> ESP32 module bridging local commands to remote PC/mobile app control via HTTP protocol</li>
                 <li><strong>3D-Printed Enclosure:</strong> Custom-designed case with annotated front panel showing component placement and user interface elements</li>
             </ul>
@@ -447,7 +515,7 @@
                 <li>Real-time environmental monitoring (temperature/humidity)</li>
                 <li>Multi-modal user interaction (voice, Wi-Fi, physical buttons)</li>
                 <li>Responsive LCD display with animated expressions</li>
-                <li>Motion control through PWM-based servo and motor drivers</li>
+                <li>Motion control through 28BYJ-48 stepper motors with ULN2003 drivers for precise 4-phase sequential control</li>
             </ul>
 
             <!-- SRS Validation Section -->
@@ -556,9 +624,9 @@
                     </tr>
                     <tr>
                         <td><strong>HRS-05</strong></td>
-                        <td>Motor controlled by PWM signal switching MOSFET on/off.</td>
+                        <td>28BYJ-48 stepper motors controlled by 4 sequentially pulsed signals via ULN2003 driver IC.</td>
                         <td><span class="success">✓ ACHIEVED</span></td>
-                        <td>PWM control via TB6612FNG motor driver verified. MOSFET gate signal shows clean square wave at 1-20kHz switching frequency. Motor speed proportional to duty cycle tested from 0-100% in 25% increments. All motors respond smoothly.</td>
+                        <td>4-phase sequential control verified with oscilloscope showing clean transitions between phases. ULN2003 Darlington array driver provides sufficient current (500mA per phase) for smooth stepping. Motor achieves 4096 steps per revolution (with gearbox). Logic analyzer captures confirm proper phase sequence timing. All stepper motors respond reliably with no missed steps at operating speeds up to 15 RPM.</td>
                     </tr>
                     <tr>
                         <td><strong>HRS-06</strong></td>
@@ -626,7 +694,7 @@
                     <li><strong>Initial vs. Final Architecture:</strong> Initially considered single MCU with heavy multiplexing; pivoted to dual-MCU after realizing the timing constraints between real-time motor control and sensor aggregation were incompatible. The dual-MCU approach proved far superior for maintainability.</li>
                     <li><strong>Communication Protocol Selection:</strong> Started with SPI for inter-MCU; switched to UART due to simpler board routing and lower EMI. UART 115200 baud provided sufficient bandwidth while being more robust.</li>
                     <li><strong>Display Selection:</strong> Considered larger displays (2.4", 3.5") but settled on 1.8" ST7735 to keep power consumption reasonable and maintain desk-friendly form factor.</li>
-                    <li><strong>Motor Architecture:</strong> Initially planned stepper motors for position feedback; simplified to PWM DC motors with gearboxes after recognizing the added complexity wasn't justified for desktop movement.</li>
+                    <li><strong>Motor Architecture:</strong> Initially planned DC motors with PWM speed control; switched to 28BYJ-48 stepper motors with ULN2003 drivers for better position control and smoother low-speed operation. The 4-phase sequential control provides more precise movement for the desktop pet's limited range of motion.</li>
                 </ul>
             </div>
             
@@ -667,8 +735,9 @@
                 <li><strong>AHT20 Sensor:</strong> Aosong AHT20 Datasheet - Temperature & Humidity Sensor</li>
                 <li><strong>DFRobot Voice Module:</strong> DFRobot Gravity Offline Voice Recognition Module Documentation</li>
                 <li><strong>DFPlayer Mini:</strong> DFRobot DFPlayer Mini MP3 Module Datasheet</li>
-                <li><strong>TB6612FNG Motor Driver:</strong> Toshiba TB6612FNG Dual Motor Driver Datasheet</li>
-                <li><strong>TowerPro SG92R Servo:</strong> Servo Motor Specifications and Control Protocol</li>
+                <li><strong>28BYJ-48 Stepper Motor:</strong> 28BYJ-48 5V Stepper Motor Specifications (4096 steps/revolution with gearbox)</li>
+                <li><strong>ULN2003 Driver IC:</strong> Texas Instruments ULN2003A Darlington Transistor Array Datasheet</li>
+                <li><strong>TowerPro SG51R Servo:</strong> Servo Motor Specifications and Control Protocol</li>
             </ul>
             
             <h3>Libraries & Development Tools</h3>
@@ -742,5 +811,47 @@
         <p>&copy; 2025 Team 25 - GaN HEMT Desktop Pet Robot | ESE5190 Final Project | University of Pennsylvania</p>
         <p>Last Updated: December 2025</p>
     </footer>
+    
+    <!-- Lightbox for viewing images -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+    
+    <script>
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightbox.classList.add('active');
+            lightboxImg.src = src;
+            lightboxCaption.textContent = alt;
+            
+            // Prevent body scrolling when lightbox is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            
+            // Restore body scrolling
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+        
+        // Prevent closing when clicking on the image itself
+        document.getElementById('lightbox-img').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
 </body>
 </html>

@@ -270,12 +270,11 @@
         }
         
         .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 2rem;
             margin: 2rem 0;
             justify-content: center;
-            justify-items: center;
         }
         
         .image-card {
@@ -286,8 +285,9 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            flex: 0 1 calc(33.333% - 1.5rem);
+            min-width: 300px;
             max-width: 400px;
-            width: 100%;
         }
         
         .image-card:hover {
@@ -1027,10 +1027,9 @@
             
             <h3>Libraries & Development Tools</h3>
             <ul>
-                <li><strong>Firmware Development:</strong> Arduino IDE, AVR-GCC Compiler, Atmel Studio</li>
-                <li><strong>Debugging Tools:</strong> Oscilloscope (Rigol DS1054Z), Logic Analyzer (Saleae Logic), Serial Monitor</li>
-                <li><strong>CAD & Design:</strong> Fusion 360 (3D modeling), KiCAD (board design)</li>
-                <li><strong>Testing & Validation:</strong> Python (data logging, analysis), Wireshark (packet capture), custom test harnesses</li>
+                <li><strong>Firmware Development:</strong> Arduino IDE, MPLAB X IDE, Python</li>
+                <li><strong>Debugging Tools:</strong> Oscilloscope, Logic(a logic analyze software), Serial Monitor</li>
+                <li><strong>Testing & Validation:</strong> Python (data logging, analysis)</li>
             </ul>
             
             <h3>Learning Resources Referenced</h3>

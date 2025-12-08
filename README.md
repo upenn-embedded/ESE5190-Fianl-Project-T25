@@ -56,8 +56,8 @@ System Block Diagram:
 * **DFPlayer Mini + Speaker**
   * Audio prompts and reactions (UART from Output MCU).
 * **Actuators**
-  * **4× DC motors** (PWM from Output MCU via motor drivers).
-  * **2× micro servos** (PWM from Output MCU).
+  * **4× Step motors** (Sequence signal from Output MCU via motor drivers).
+  * **2× micro servos** (50 Hz Pulse from Output MCU).
 
 #### Communication Map
 
@@ -71,8 +71,8 @@ System Block Diagram:
 * **SPI**
   * Output MCU → 1.8″ TFT LCD
 * **PWM**
-  * Output MCU → 4× Motor driver PWM inputs
-  * Output MCU → 2× Servo signal lines
+  * Output MCU → 2× Motor driver PWM inputs. 4 singals per side, drive the step motor in equentially sending the 4 signals.
+  * Output MCU → 2× Servo signal lines. 50 Hz pulse. 
 * **Wi-Fi / HTTP**
   * ESP32 ↔ PC GUI / Phone App (remote panel, telemetry)
 
@@ -356,7 +356,7 @@ If you’ve never made a GitHub pages website before, you can follow this webpag
 
 ### 1. Video
 
-[Insert final project video here]
+[Video for Final Demo](https://drive.google.com/file/d/1NroqmagO9cOS1FrMaRXVxVrxkaFy61dW/view?usp=sharing)
 
 * The video must demonstrate your key functionality.
 * The video must be 5 minutes or less.

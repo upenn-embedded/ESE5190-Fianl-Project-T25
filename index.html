@@ -81,11 +81,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-        }
-        
-        section:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
         
         section::before {
@@ -97,6 +93,12 @@
             height: 4px;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             border-radius: 24px 24px 0 0;
+            pointer-events: none;
+        }
+        
+        section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         
         h2 {
@@ -411,12 +413,14 @@
         }
         
         .conclusion-section h3 {
-            padding-left: 0;
+            padding-left: 2.5rem;
         }
         
         .conclusion-section h3::before {
             content: '🌟';
-            margin-right: 0.5rem;
+            position: absolute;
+            left: 0;
+            font-size: 1.3rem;
         }
         
         /* Lightbox styles for image viewing */

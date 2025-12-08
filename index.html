@@ -274,6 +274,8 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+            justify-content: center;
+            justify-items: center;
         }
         
         .image-card {
@@ -284,6 +286,8 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            max-width: 400px;
+            width: 100%;
         }
         
         .image-card:hover {
@@ -971,10 +975,10 @@
                 <p><strong>Key Design Evolution:</strong></p>
                 <ul>
                     <li><strong>Initial vs. Final Architecture:</strong> Initially considered dual-MCU architecture with separate input and output controllers. Through careful analysis, we successfully optimized the design to use a single ATmega328PB by reducing unnecessary signal lines, optimizing channel allocation, and implementing efficient multiplexing. This consolidation simplified the system while maintaining full functionality and reducing potential points of failure.</li>
-                    <li><strong>ESP32 Role Definition:</strong> Rather than using ESP32 as a general-purpose co-processor, we optimized it as a dedicated network bridge, handling only Wi-Fi connectivity and HTTP server functions while the ATmega328PB manages all real-time control tasks. This clear separation of responsibilities improved system reliability.</li>
+                    <li><strong>ESP32 Role Definition:</strong> Rather than using ESP32 as a general-purpose co-processor, we optimized it as a dedicated network bridge, handling only Wi-Fi connectivity and HTTP server functions while the ATmega328PB manages all real-time control tasks(as the course required). This clear separation of responsibilities also improved system reliability.</li>
                     <li><strong>Communication Protocol Selection:</strong> UART proved ideal for ATmega328PB-ESP32 communication, providing sufficient bandwidth for command relay while keeping routing simple and robust.</li>
                     <li><strong>Display Selection:</strong> Considered larger displays (2.4", 3.5") but settled on 1.8" ST7735 to keep power consumption reasonable and maintain desk-friendly form factor.</li>
-                    <li><strong>Motor Architecture:</strong> Initially planned DC motors with PWM speed control; switched to 28BYJ-48 stepper motors with ULN2003 drivers for better position control and smoother low-speed operation. The 4-phase sequential control provides more precise movement for the desktop pet's limited range of motion.</li>
+                    <li><strong>Motor Architecture:</strong> Initially planned DC motors with PWM speed control; switched to 28BYJ-48 stepper motors with ULN2003 drivers for better position control and smoother low-speed operation(as its role as a desktop pet). The 4-phase sequential control provides more precise movement for the desktop pet's limited range of motion.</li>
                 </ul>
             </div>
             

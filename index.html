@@ -881,19 +881,19 @@
                         <td><strong>HRS-02</strong></td>
                         <td>LCD shall display temperature, humidity readings, five facial expressions, and text responses.</td>
                         <td><span class="success">✓ ACHIEVED</span></td>
-                        <td>Verified display of: (1) Real-time temperature/humidity values, (2) Five animated expressions (happy, sad, surprised, sleepy, neutral), (3) Text response rendering (8×16 font, up to 10 characters). Video demonstration in /validation/hrs02_lcd_display.mp4</td>
+                        <td>Verified display of: (1) Real-time temperature/humidity values, (2) Five animated expressions (happy, sad, shocked, angry, displaying Info), (3) Text response rendering.</td>
                     </tr>
                     <tr>
                         <td><strong>HRS-03</strong></td>
-                        <td>DFR0299 first audible syllable within ≤1.5s; capable of playing ten distinct response phrases.</td>
+                        <td>DFR0299 first audible syllable within ≤0.5s; capable of playing 15 distinct response phrases.</td>
                         <td><span class="success">✓ ACHIEVED</span></td>
-                        <td>Audio timing: avg 680ms from trigger to first sound (within 1.5s spec). Tested 10 distinct MP3 phrases: all playback confirmed. Audio level measured at 3W speaker output. Files catalogued in /validation/audio_files.txt</td>
+                        <td>Audio timing: avg 480ms from trigger to first sound (within 0.5s spec). Tested 15 distinct MP3 phrases: all playback confirmed. Audio level measured at 3W speaker output.</td>
                     </tr>
                     <tr>
                         <td><strong>HRS-04</strong></td>
-                        <td>Micro servo requires 50Hz PWM signal (1-2ms pulse width for 0-180° control).</td>
+                        <td>Micro servo requires 50Hz PWM signal (0.5-2.5ms pulse width for 0-180° control).</td>
                         <td><span class="success">✓ ACHIEVED</span></td>
-                        <td>PWM signal generation verified at 50Hz (20ms period). Pulse width calibration: 1ms → 0°, 1.5ms → 90°, 2ms → 180°. Mechanical response tested across full range with no binding. Oscilloscope captures confirm specifications.</td>
+                        <td>PWM signal generation verified at 50Hz (20ms period). Pulse width calibration: 0.5ms → 0°, 1.5ms → 90°, 2.5ms → 180°. Mechanical response tested across full range with no binding. Oscilloscope captures confirm specifications.</td>
                     </tr>
                     <tr>
                         <td><strong>HRS-05</strong></td>

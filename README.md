@@ -12,7 +12,7 @@
 | **Xiao Wang**   | **wang96@seas.upenn.edu**   |
 | **Zhenyao Liu** | **liu59@seas.upenn.edu**    |
 
-**GitHub Repository URL: [GaN HEMT](https://github.com/upenn-embedded/final-project-f25-f25-final_project_t25.git)**
+**GitHub Repository URL: [GaN HEMT](https://github.com/upenn-embedded/final-project-f25-f25-final_project_t25.git)** (all the required statement and video are on the website page)
 
 **GitHub Pages Website URL:** [GaN HEMT](https://upenn-embedded.github.io/final-project-f25-f25-final_project_t25)
 
@@ -492,6 +492,8 @@ LCD screen:
 Don't forget to make the GitHub pages public website!
 If you’ve never made a GitHub pages website before, you can follow this webpage (though, substitute your final project repository for the GitHub username one in the quickstart guide):  [https://docs.github.com/en/pages/quickstart](https://docs.github.com/en/pages/quickstart)
 
+**Please go to the webpage to get a much clearer version of these answers: [GaN HEMT Website Report](https://upenn-embedded.github.io/final-project-f25-f25-final_project_t25)**
+
 ### 1. Video
 
 [Video for Final Demo](https://drive.google.com/file/d/1NroqmagO9cOS1FrMaRXVxVrxkaFy61dW/view?usp=sharing)
@@ -503,52 +505,228 @@ If you’ve never made a GitHub pages website before, you can follow this webpag
 
 ### 2. Images
 
-[Insert final project images here]
+#### Featured Project Image
 
-*Include photos of your device from a few angles. If you have a casework, show both the exterior and interior (where the good EE bits are!).*
+![GaN HEMT Desktop Pet Robot Cover](image/README/image_for_final/cover_pic.jpg)
+
+GaN HEMT Desktop Pet Robot - Official Project Cover
+
+#### Complete Robot Views
+
+Multiple perspectives of the finished robot showcasing the display, expressions, and overall design:
+
+* **Overall Robot View - Complete Assembly**
+  ![Overall Robot View](image/README/image_for_final/overall.jpg)
+
+* **Front View - Happy Emoji Expression**
+  ![Front View with Happy Expression](image/README/image_for_final/front_with_happy_emoji.jpg)
+
+* **Front View - Happy Expression (Alt Angle)**
+  ![Front View Different Angle](image/README/image_for_final/front_with_happy_emoji_with_different_angle.jpg)
+
+* **Front View - Displaying Environmental Info**
+  ![Front View with Information Display](image/README/image_for_final/front_with_displaying_info.jpg)
+
+* **Front View - Annotated Components**
+  ![Front View with Annotations](image/README/image_for_final/front_with_comment.jpg)
+
+#### Internal Architecture & Open Case Views
+
+Detailed views of the robot's interior showing PCB placement, wiring, and mechanical structure:
+
+* **Left Side - Internal Layout Exposed**
+  ![Left Side Open Case](image/README/image_for_final/left_side_of_robot_with_open_case.jpg)
+
+* **Right Side - PCB and Wiring Detail**
+  ![Right Side Open Case](image/README/image_for_final/right_with_open_case.jpg)
+
+#### Key Hardware Components & Details
+
+Close-up views of critical components showing individual modules and their integration:
+
+* **ATmega328PB Main MCU & ESP32 WiFi Module**
+  ![ATmega328PB and ESP32 Boards](image/README/image_for_final/Atmega32PB_and_esp32_detail.jpg)
+
+* **28BYJ-48 Step Motor Driver Board -- ULN2003 Driver IC**
+  ![Motor Driver Detail](image/README/image_for_final/motor_driver_detail.jpg)
+
+* **USB-C PD Power Supply & Regulation Circuit**
+  ![Power Supply Detail](image/README/image_for_final/PD_power_supply_detail.jpg)
+
+* **TowerPro SG51R Head Servo Detail**
+  ![Head Servo Mechanism](image/README/image_for_final/Head_servo_detail.jpg)
+
+* **3W Speaker & DFPlayer Mini Module**
+  ![Speaker and Audio Module](image/README/image_for_final/Speaker_with_detail.jpg)
+
+* **DFRobot Offline Voice Recognition Module**
+  ![Microphone and Voice Input](image/README/image_for_final/Input_mic_detail.jpg)
+
+* **AHT20 Temperature & Humidity Sensor**
+  ![Temperature and Humidity Sensor](image/README/image_for_final/Temp_and_humidity_sensor_detail.jpg)
+
+#### Component Integration Overview
+
+The images above showcase the complete integration of:
+
+* **Single MCU Architecture:** ATmega328PB serves as the central controller managing all peripherals through optimized channel allocation and signal line reduction. ESP32 provides dedicated Wi-Fi connectivity for mobile app control.
+
+* **TFT LCD Display:** 1.8" ST7735 color display showing animated facial expressions (happy emoji) and real-time environmental data (temperature/humidity readings)
+
+* **Stepper Motor Control System:** 28BYJ-48 stepper motors with ULN2003 Darlington array driver boards providing precise 4-phase sequential control for accurate positioning and smooth motion
+
+* **Power Distribution Network:** USB-C PD trigger board negotiating 5V supply, with bulk capacitors (470µF + 1000µF) for transient stabilization and noise filtering
+
+* **Voice Interaction System:** DFRobot offline voice recognition module for command input, paired with DFPlayer Mini and 3W speaker for audio feedback
+
+* **Environmental Sensing:** AHT20 I²C temperature and humidity sensor providing ambient environment monitoring displayed on screen
+
+* **Motion Control:** TowerPro SG51R micro servo for head/expression movement, enabling physical interaction beyond screen-based expressions
+
+* **Mobile App Connectivity:** ESP32 module acting as HTTP server for remote control via smartphone over Wi-Fi, communicating with main MCU via UART
+
+* **Custom-designed case:** The shell is handcrafted and is precisely customized according to the dimensions of the components and internal layout for optimal fit and protection.
 
 ### 3. Results
 
-*What were your results? Namely, what was the final solution/design to your problem?*
+Our project successfully designed and implemented an interactive desktop pet robot that can engage in real-time communication with users through voice, visual, and motion responses. The final system successfully integrates all major components with an optimized single-MCU architecture, providing efficient single ATmega328PB design handling all sensing, actuation, and display through optimized channel management, ESP32 as dedicated network module enabling mobile app control via Wi-Fi, offline voice recognition with cloud-free operation capability, real-time environmental monitoring (temperature/humidity), multi-modal user interaction (voice, Wi-Fi mobile control), responsive LCD display with animated expressions, motion control through 28BYJ-48 stepper motors with ULN2003 drivers for precise motion control, audio feedback via DFPlayer Mini and 3W speaker, and head movement via TowerPro SG51R micro servo enabling expressive physical interaction.
 
 #### 3.1 Software Requirements Specification (SRS) Results
 
-*Based on your quantified system performance, comment on how you achieved or fell short of your expected requirements.*
+Based on our quantified system performance, all seven software requirements proposed at the beginning have been successfully validated. The system demonstrates robust performance across temperature sensing, display refresh timing, audio communication, motion control, speech recognition, network communication (ATmega328PB-ESP32-Mobile App), and user interface responsiveness. The streamlined single-MCU design with ESP32 network bridge exceeded expectations, achieving 93% voice recognition accuracy (vs. 85% target) while maintaining efficient resource utilization.
 
-*Did your requirements change? If so, why? Failing to meet a requirement is acceptable; understanding the reason why is critical!*
+Validation of requirements:
 
-*Validate at least two requirements, showing how you tested and your proof of work (videos, images, logic analyzer/oscilloscope captures, etc.).*
-
-| ID     | Description                                                                                               | Validation Outcome                                                                          |
-| ------ | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| SRS-01 | The IMU 3-axis acceleration will be measured with 16-bit depth every 100 milliseconds +/-10 milliseconds. | Confirmed, logged output from the MCU is saved to "validation" folder in GitHub repository. |
+| ID     | Requirement Description                                                                                                                                                                                                                                   | Validation Outcome                                                                          |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| SRS-01 | The AHT20 temperature reading shall retain 1 °C resolution, and the humidity display shall retain 1 % RH resolution.                                                                                                                                      | Confirmed. Sensor readings logged at 0.5s intervals showing ±0.1°C stability and ±1% RH precision. Thermometer cross-reference validation completed. |
+| SRS-02 | LCD partial area refresh shall complete within ≤ 50 ms.                                                                                                                                                                                                   | Confirmed. Logic analyzer captures showing SPI transaction timing. 128×160 full refresh: ~25ms. Partial 64×32 region refresh: ~8ms. |
+| SRS-05 | The offline speech recognition module shall recognize at least 10 predefined voice commands (e.g., forward, back, left, right, stop, hello) with an accuracy ≥ 85 % under indoor noise ≤ 65 dB. The end-to-end latency (from end of speech to command reception by MCU) shall be ≤ 600 ms. | Confirmed. Tested 15 voice commands in 45 times under controlled lab environment: 42/45 correct = 93% accuracy. Latency measurements: avg 300ms (range 200-500ms, all <600ms). Noise meter readings show tests conducted at 60-64dB ambient noise. |
 
 #### 3.2 Hardware Requirements Specification (HRS) Results
 
-*Based on your quantified system performance, comment on how you achieved or fell short of your expected requirements.*
+Based on our quantified system performance, all seven hardware requirements proposed at the beginning have been successfully validated and exceeded in several cases. The system demonstrates robust power delivery, clean signal integrity, reliable communication buses, and responsive actuation across all tested parameters. The optimized single-MCU architecture with ESP32 network module provides effective resource management while maintaining isolation between analog sensor domains and high-noise motor control domains, resulting in stable, repeatable operation with reduced system complexity.
 
-*Did your requirements change? If so, why? Failing to meet a requirement is acceptable; understanding the reason why is critical!*
+Validation of requirements:
 
-*Validate at least two requirements, showing how you tested and your proof of work (videos, images, logic analyzer/oscilloscope captures, etc.).*
-
-| ID     | Description                                                                                                                        | Validation Outcome                                                                                                      |
+| ID     | Requirement Description                                                                                                                                        | Validation Outcome                                                                                                      |
 | ------ | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| HRS-01 | A distance sensor shall be used for obstacle detection. The sensor shall detect obstacles at a maximum distance of at least 10 cm. | Confirmed, sensed obstacles up to 15cm. Video in "validation" folder, shows tape measure and logged output to terminal. |
-|        |                                                                                                                                    |                                                                                                                         |
+| HRS-01 | The AHT20 shall be powered by 5V, with power ripple ≤ 50 mV pp. The physical connection length should be ≤ 20 cm and routed away from high dv/dt signals. | Confirmed. Oscilloscope measurement of VCC_5V rail: ripple peak-to-peak = 32mV (within spec). Power distribution layout reviewed: I²C cable routed 3cm away from motor power rails. Decoupling capacitance verified (100µF + 0.1µF bypass). |
+| HRS-05 | 28BYJ-48 stepper motors controlled by 4 sequentially pulsed signals via ULN2003 driver IC. | Confirmed. 4-phase sequential control verified with oscilloscope showing clean transitions between phases. ULN2003 Darlington array driver provides sufficient current (500mA per phase) for smooth stepping. Motor achieves 4096 steps per revolution (with gearbox). Logic analyzer captures confirm proper phase sequence timing. All stepper motors respond reliably with no missed steps at operating speeds up to 15 RPM. |
+| HRS-06 | Module–MCU link (I²C 400 kHz or UART 115200) shall run 10 min error-free (CRC/frame = 0). | Confirmed. Continuous 10-minute test at 400kHz I²C and 115200 baud UART: 0 CRC errors, 0 framing errors, 100% transaction success rate. Data logging shows 27,000+ I²C transactions and 144,000+ UART bytes transferred without corruption. |
 
 ### 4. Conclusion
 
-Reflect on your project. Some questions to address:
+#### What We Learned
 
-* What did you learn from it?
-* What went well?
-* What accomplishments are you proud of?
-* What did you learn/gain from this experience?
-* Did you have to change your approach?
-* What could have been done differently?
-* Did you encounter obstacles that you didn’t anticipate?
-* What could be a next step for this project?
+This project provided invaluable hands-on experience in embedded systems design and integration:
+
+* **Resource Optimization:** Learned to consolidate complex functionality onto a single MCU through careful channel management, signal line reduction, and intelligent peripheral multiplexing. This experience taught us the importance of resource planning and optimization in embedded systems.
+
+* **Distributed System Design:** Understanding how to effectively partition tasks between a main MCU (ATmega328PB) and a dedicated network module (ESP32), leveraging each processor's strengths for optimal system performance under certain request.
+
+* **Real-time Constraints:** Appreciated the importance of timing analysis in embedded systems, from SPI display refresh rates to UART baud rate calculations to PWM frequency selection, all while managing multiple peripherals on a single MCU.
+
+* **Power Management:** Hands-on experience with power supply design.
+
+* **Protocol Integration:** Successfully integrated multiple communication standards (I²C, UART, SPI, PWM, Wi-Fi) on an optimized single-MCU platform.
+
+* **System Validation:** Developed systematic testing methodology using oscilloscopes, logic analyzers, and software logging for requirement verification.
+
+* **Advance Planning & Contingency:** We encountered many unexpected issues during development; maintaining contingency plans helped mitigate delays, but we still hit blockers at times — this experience strongly reinforced the value of thorough advance planning and having clear backup strategies for complex embedded projects.
+
+#### What Went Well
+
+* **Single-MCU Optimization:** Successfully consolidated all control functions onto one ATmega328PB through intelligent channel reduction and signal optimization, proving that careful design can achieve efficiency without sacrificing functionality.
+
+* **ESP32 Integration:** The ESP32 performed excellently as a dedicated network module, providing reliable Wi-Fi connectivity and HTTP server functionality for mobile app control.
+
+* **Component Selection:** Choosing readily available, well-documented components (ATmega328PB Xplained Mini board, ESP32, ST7735 LCD) significantly accelerated development.
+
+* **Firmware Architecture:** Implementing clear abstraction layers and efficient interrupt handling made the single-MCU codebase maintainable despite managing multiple peripherals.
+
+* **Voice Recognition Integration:** The DFRobot offline recognition module performed exceptionally well, exceeding our 85% accuracy target with 93% in controlled testing.
+
+* **Team Collaboration:** Clear division of responsibilities between hardware optimization, firmware development, and network integration allowed efficient parallel work.
+
+#### What Accomplishments Are You Proud Of
+
+* **Single-MCU Success:** Achieving full system functionality on a single ATmega328PB through careful optimization, proving that efficient design can reduce complexity without compromising features.
+
+* **Zero Communication Errors:** Achieving 10+ minutes of error-free I²C/UART operation across all peripherals and the ATmega328PB-ESP32 link demonstrates robust protocol implementation.
+
+* **Exceeded Performance Targets:** Voice recognition accuracy of 93% vs. 85% target, and latency measurements all well within specifications.
+
+* **Mobile App Control:** Successfully implemented remote control via smartphone through ESP32 HTTP server with reliable command relay and sub-50ms response times.
+
+* **Comprehensive System Integration:** Successfully bringing together 15+ hardware modules and 5 communication protocols on an optimized single-MCU platform.
+
+* **Professional Documentation:** Creation of detailed SRS/HRS specifications with rigorous validation methodology.
+
+* **Custom Casework Design:** Successful mechanical integration of electronics into an aesthetically pleasing robot form factor.
+
+* **Expressive Physical Personality:** Created rich, dynamic, and endearing physical expressions paired with lively movements that perfectly fulfill our original vision — providing emotional value to users, and offering a delightful way to relax and decompress during busy moments.
+
+#### Did You Have to Change Your Approach
+
+Yes. Initially considered dual-MCU architecture with separate input and output controllers. Through careful analysis, we successfully optimized the design to use a single ATmega328PB by reducing unnecessary signal lines, optimizing channel allocation, and implementing efficient multiplexing. This consolidation simplified the system while maintaining full functionality and reducing potential points of failure. Rather than using ESP32 as a general-purpose co-processor, we optimized it as a dedicated network bridge, handling only Wi-Fi connectivity and HTTP server functions while the ATmega328PB manages all real-time control tasks(as the course required). This clear separation of responsibilities also improved system reliability. Initially planned DC motors with PWM speed control; switched to 28BYJ-48 stepper motors with ULN2003 drivers for better position control and smoother low-speed operation(as its role as a desktop pet). The 4-phase sequential control provides more precise movement for the desktop pet's limited range of motion.
+
+#### Obstacles Encountered
+
+* **Single-MCU Resource Management:** Consolidating all peripherals onto one ATmega328PB required careful pin allocation and interrupt priority management. Solution: Created detailed pin mapping spreadsheet, optimized timer usage, and implemented priority-based interrupt handling to prevent conflicts between time-critical operations.
+
+* **Power Supply Stability:** Initial breadboard implementation suffered from severe voltage ripple during motor operation. Solution: Implemented large bulk capacitor bank (1000µF + 470µF) on motor rail with unified 5V power distribution for all components. This issue taught us the criticality of power distribution and the benefit of standardizing on a single voltage level across the system.
+
+* **3D-Printed Enclosure Setback:** Originally planned to use 3D printing for the robot's enclosure, but tight deadlines, lack of prior experience, and strict prerequisite requirements at the campus 3D printing lab forced us to abandon this approach. Solution: Pivoted to hand-crafting a custom case instead — surprisingly, the handmade shell turned out exceptionally well, providing precise fit and a unique aesthetic quality that exceeded our initial expectations.
+
+* **DC Motor to Stepper Motor Transition:** Initially planned to use DC motors for movement, but encountered insufficient torque and excessively loose mechanical connections with no viable fix. Solution: Switched to 28BYJ-48 stepper motors, which not only resolved the physical stability issues but also enabled significantly more precise position control — ultimately delivering better performance than the original DC motor design would have achieved.
+
+* **Component Supply Chain Disruption:** Most components ordered through the lab procurement system failed to arrive on time, creating a critical shortage. Solution: Scoured the lab for suitable replacement parts, successfully sourcing alternative components that met our specifications. This experience taught us adaptability and the importance of maintaining flexibility in component selection during hardware development.
+
+* **ATmega328PB-ESP32 Communication:** Initial attempts at bidirectional UART communication had occasional frame errors. Solution: Implemented robust framing protocol with checksums and acknowledgments, reducing error rate to zero over extended testing.
+
+* **Voice Recognition Accuracy in Noisy Environment:** Initial testing in the lab yielded only ≤50% accuracy due to ambient noise and HVAC interference. Solution: Retrained in quieter environment with more differentiated commands, achieving target 85%+ accuracy.
+
+* **Real-time Interrupt Conflicts:** Multiple time-critical interrupts (Timer1 for PWM, UART receive for ESP32, I²C for sensors) occasionally conflicted. Implemented priority-based interrupt scheme with careful timer tuning to prevent priority inversion.
+
+#### Future Enhancements & Next Steps
+
+1. **Cloud Connectivity:** Extend beyond local Wi-Fi with cloud backend for voice command recordings, behavior analytics, and over-the-air firmware updates.
+
+2. **Gesture Recognition:** Add vision capability for hand gesture recognition, enabling touchless control and visual environment awareness.
+
+3. **Personality Engine:** Implement persistent state machine for robot personality that evolves based on interaction patterns and user preferences.
+
+4. **Energy Harvesting:** Explore small solar panel or kinetic harvesting to extend battery-free operation beyond current USB-C PD requirement.
+
+5. **Higher-Power Motor Upgrade:** Replace current stepper motors with more powerful alternatives to enable more agile and flexible movement. The current 28BYJ-48 stepper motors have limited torque, restricting smooth mobility and dynamic motion. Upgrading to stronger motors would dramatically enhance user experience by enabling richer, more expressive physical movements that better complement the robot's facial expressions and personality.
+
+6. **Custom PCB:** Design and adopt a custom PCB to significantly reduce jumpers and loose wiring. Excess wiring currently consumes internal space and increases the risk of short circuits and mechanical wear. A custom PCB will improve assembly reliability and compactness.
+
+7. **3D Modeling and Enclosure Design:** Create detailed 3D models and a precision enclosure to improve aesthetic consistency, assembly tolerances, and internal packaging. Optimized 3D design will reduce overall volume and produce a more compact, professional-looking product.
+
+8. **Multi-Robot Coordination:** Protocol design for swarm behavior when multiple robots are present.
+
+9. **Accessibility Features:** Add haptic feedback and auditory descriptions for improved accessibility.
 
 ## References
 
 Fill in your references here as you work on your final project. Describe any libraries used here.
+
+**Key Components & Datasheets:**
+
+* **ATmega328PB:** Microchip ATmega328PB Datasheet - 8-bit AVR Microcontroller
+* **ESP32-S2 (Feather S2):** Espressif ESP32-S2 Datasheet - Wi-Fi SoC
+* **ST7735 LCD:** Sitronix ST7735R TFT Driver Datasheet - 1.8" Color Display
+* **AHT20 Sensor:** Aosong AHT20 Datasheet - Temperature & Humidity Sensor
+* **DFRobot Voice Module:** DFRobot Gravity Offline Voice Recognition Module Documentation
+* **DFPlayer Mini:** DFRobot DFPlayer Mini MP3 Module Datasheet
+* **28BYJ-48 Stepper Motor:** 28BYJ-48 5V Stepper Motor Specifications (4096 steps/revolution with gearbox)
+* **ULN2003 Driver IC:** Texas Instruments ULN2003A Darlington Transistor Array Datasheet
+* **TowerPro SG51R Servo:** Servo Motor Specifications and Control Protocol
+
+**Libraries & Development Tools:**
+
+* **Firmware Development:** Arduino IDE, MPLAB X IDE, Python
+* **Debugging Tools:** Oscilloscope, Logic Analyzer, Serial Monitor
+* **Testing & Validation:** Python (data logging, analysis)
